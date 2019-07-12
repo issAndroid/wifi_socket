@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">wifi_socket</string>
+    <string name="send_me">[خودم]</string>
+    <string name="send_error">[ارسال نشد]</string>
+</resources>

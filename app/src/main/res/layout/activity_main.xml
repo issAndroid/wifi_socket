@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#999"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="29sp"
+            android:textColor="@color/colorAccent"
+            android:background="@color/colorPrimaryDark"
+            android:textAlignment="center"
+            android:id="@+id/your_ip"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:padding="2sp"
+            android:text="your ip :"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/scan"
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:textColor="#fff"
+            android:background="@drawable/btn_app"
+            android:text="Scan"
+            android:textAllCaps="false" />
+
+
+        <GridView
+            android:id="@+id/list_mess"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="75sp"
+            android:background="#999"
+            android:stackFromBottom="true"
+            android:transcriptMode="alwaysScroll"
+            app:layout_constraintTop_toBottomOf="@+id/scan"></GridView>
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/bottomSheet"
+        style="@style/Widget.Design.BottomSheet.Modal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5sp"
+        app:layout_behavior="@string/bottom_sheet_behavior">
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="50sp"
+                    android:layout_marginRight="50sp"
+                    android:hint="message"
+                    tools:layout_editor_absoluteX="0dp" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/send"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_alignEnd="@+id/message"
+                    android:layout_alignRight="@+id/message"
+                    android:layout_alignBottom="@+id/message"
+                    android:layout_marginEnd="-47dp"
+                    android:layout_marginRight="-47dp"
+                    android:layout_marginBottom="6dp"
+                    android:background="@drawable/btn_send"
+                    android:text=">>"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    app:layout_constraintTop_toBottomOf="@+id/message" />
+
+            </RelativeLayout>
+
+
+            <EditText
+                android:id="@+id/http"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:enabled="false"
+                android:hint="ip"
+                android:layout_marginEnd="50sp"
+                android:layout_marginRight="50sp"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="0dp" />
+
+            <EditText
+                android:id="@+id/port"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="port"
+                android:text="5000"
+                android:layout_marginEnd="50sp"
+                android:layout_marginRight="50sp"
+                app:layout_constraintTop_toBottomOf="@+id/http"
+                tools:layout_editor_absoluteX="0dp" />
+        </LinearLayout>
+
+
+
+
+
+
+
+    </FrameLayout>
+
+</android.support.design.widget.CoordinatorLayout>

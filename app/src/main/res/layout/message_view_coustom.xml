@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rootview"
+    android:padding="10dp"
+    android:layout_marginLeft="5sp"
+    android:layout_marginTop="5sp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15dp"
+        android:id="@+id/ip_view"
+        android:textColor="#192B28"
+        android:text="ip:"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20dp"
+        android:id="@+id/message_view"
+        android:layout_margin="5sp"
+        android:textColor="#000"
+        android:text="message:"/>
+
+
+</LinearLayout>
