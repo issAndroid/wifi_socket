@@ -15,14 +15,14 @@ public class NetworkRes extends BroadcastReceiver {
                 // Hotspot AP is enabled
                 MainActivity.hotspot_state = true;
                 MainActivity.your_ip.setText(MainActivity.getLocalIpAddress());
-                MainActivity.your_ip.setTextColor(ThemeColor.colorAccent);
+                MainActivity.your_ip.setTextColor(Settings.colorAccent);
 
             } else {
                 // Hotspot AP is disabled/not ready
                 MainActivity.hotspot_state = false;
                 if (!MainActivity.wifi_state) {
                     MainActivity.your_ip.setText("Not Connected");
-                    MainActivity.your_ip.setTextColor(ThemeColor.error_color);
+                    MainActivity.your_ip.setTextColor(Settings.error_color);
                 }
 
             }
@@ -33,13 +33,13 @@ public class NetworkRes extends BroadcastReceiver {
         if(info != null && info.isConnected()) {
             MainActivity.wifi_state = true;
             MainActivity.your_ip.setText(MainActivity.getLocalIpAddress());
-            MainActivity.your_ip.setTextColor(ThemeColor.colorAccent);
+            MainActivity.your_ip.setTextColor(Settings.colorAccent);
 
         }else {
             MainActivity.wifi_state = false;
             if (!MainActivity.hotspot_state) {
                 MainActivity.your_ip.setText("Not Connected");
-                MainActivity.your_ip.setTextColor(ThemeColor.error_color);
+                MainActivity.your_ip.setTextColor(Settings.error_color);
             }
         }
 

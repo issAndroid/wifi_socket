@@ -1,6 +1,5 @@
 package com.example.wifi_socket;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -8,8 +7,6 @@ import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.context = getApplicationContext();
-        ThemeColor themeColor = new ThemeColor();
+        Settings themeColor = new Settings();
         init();
         send();
         res();
@@ -140,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
         userMessages=new UserMessages();
         View bottomsheet = findViewById(R.id.bottomSheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
-        bottomsheet.setBackgroundColor(ThemeColor.bottomsheetcolor);
+        bottomsheet.setBackgroundColor(Settings.bottomsheetcolor);
 
         if (getLocalIpAddress() != null)
             your_ip.setText("your ip : "+getLocalIpAddress());

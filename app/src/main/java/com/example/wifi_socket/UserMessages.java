@@ -17,12 +17,12 @@ public class UserMessages {
         MessageView m = new MessageView(MainActivity.context);
         m.setTextView(ip,message);
         if (ip.equals(MainActivity.context.getResources().getString(R.string.send_me))){
-            m.set_Color(ThemeColor.send_me,true);
+            m.set_Color(Settings.send_me,true);
         }else if (ip.equals(MainActivity.context.getResources().getString(R.string.send_error))){
-            m.set_Color(ThemeColor.send_error,true);
+            m.set_Color(Settings.send_error,true);
             Toast.makeText(MainActivity.context, "کسی گوش نمیده!", Toast.LENGTH_SHORT).show();
         }else {
-            m.set_Color(ThemeColor.send_accepted,false);
+            m.set_Color(Settings.send_accepted,false);
         }
         list.add(m);
         MainActivity.mess_list.setAdapter(new MyGraidViewAdapter(list));
