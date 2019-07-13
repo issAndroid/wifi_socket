@@ -20,13 +20,14 @@ class MessRes extends Thread implements Runnable{
     static InputStreamReader isr;
     static BufferedReader br;
     Handler handler=new Handler();
+    static CommandHandler commandHandler;
 
 
     @Override
     public void run() {
         super.run();
         try {
-            sss=new ServerSocket(MainActivity.get_port());
+            sss=new ServerSocket(Integer.valueOf(MainActivity.get_port()));
             while (true){
                 sockets=sss.accept();
                 isr=new InputStreamReader(sockets.getInputStream());
@@ -38,17 +39,20 @@ class MessRes extends Thread implements Runnable{
                     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                     @Override
                     public void run() {
-                        String ip=MainActivity.get_ip();
-                        if (ip.equals(""))
-                            UserMessages.add_message("Ip: "+MainActivity.get_ip(),str);
-                        else
-                            UserMessages.add_message("Ip: Unknown",str);
+                        if (!is_command(str)) {
+                            String[] con = get_mess(str);
+                            String ip = con[0];
+                            if (!ip.equals(""))
+                                UserMessages.add_message("Ip: " + ip, con[1]);
+                            else
+                                UserMessages.add_message("Ip: Unknown", con[1]);
+                        }else {
+                                commandHandler = new CommandHandler(get_command(str));
+                        }
                     }
                 });
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        } catch (IOException e) {}
     }
 
 
@@ -64,5 +68,30 @@ class MessRes extends Thread implements Runnable{
         br.close();
 
         return out;
+    }
+
+
+
+    public boolean is_command(String s){
+
+        if (s.length()>=3 && s.charAt(0)=='*' && s.charAt(1)=='*' && s.charAt(2)=='*')
+            return true;
+        else return false;
+    }
+    public String get_command(String s){
+        return s.substring(3);
+    }
+
+    public String[] get_mess(String s){
+        int i=0;
+        String[] ret = new String[2];
+        while (!s.substring(i,i+4).equals("////")){
+            i++;
+        }
+
+        ret[0]=s.substring(i+4);
+        ret[1]=s.substring(0,i-1);
+
+        return ret;
     }
 }

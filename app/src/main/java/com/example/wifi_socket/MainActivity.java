@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,7 +30,7 @@ import java.util.Enumeration;
 public class MainActivity extends AppCompatActivity {
 
     public static boolean wifi_state=false, hotspot_state=false, ip_send_set=false;
-    static EditText http, port, message;
+    static EditText http, port, message, myname;
     Button send, scan;
     static Context context;
     static GridView mess_list;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     View bottomsheet;
     BottomSheetBehavior bottomSheetBehavior;
     static TextView your_ip;
+    public static String target_name;
+    static CoordinatorLayout layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void scanpage() {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "این که خودتی!", Toast.LENGTH_SHORT).show();
                 }else {
                     MessSend m = new MessSend();
-                    m.execute();
+                    m.execute("true",get_mess(),get_ip(),get_port(),"false");
                 }
             }
         });
@@ -131,19 +133,39 @@ public class MainActivity extends AppCompatActivity {
         scan = (Button) findViewById(R.id.scan);
         http = (EditText) findViewById(R.id.http);
         port = (EditText) findViewById(R.id.port);
+        myname = (EditText) findViewById(R.id.myname);
         message = (EditText) findViewById(R.id.message);
+        layout=(CoordinatorLayout) findViewById(R.id.coorlayout);
         mess_list = (GridView) findViewById(R.id.list_mess);
         your_ip=(TextView) findViewById(R.id.your_ip);
         userMessages=new UserMessages();
         View bottomsheet = findViewById(R.id.bottomSheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
         bottomsheet.setBackgroundColor(Settings.bottomsheetcolor);
+        layout.setBackgroundColor(Settings.background_color);
+        mess_list.setBackgroundColor(Settings.background_color);
 
         if (getLocalIpAddress() != null)
             your_ip.setText("your ip : "+getLocalIpAddress());
         else your_ip.setText("Not Connected!!");
 
         resize();
+        myname_listener();
+    }
+
+    private void myname_listener() {
+        myname.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                Settings.setMy_name(myname.getText().toString());
+            }
+        });
     }
 
     private void resize() {
@@ -185,8 +207,8 @@ public class MainActivity extends AppCompatActivity {
         return null;
     }
 
-    public static int get_port() {
-        return Integer.parseInt(port.getText().toString());
+    public static String get_port() {
+        return (port.getText().toString());
     }
 
     public static String get_ip() {

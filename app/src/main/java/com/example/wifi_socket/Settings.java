@@ -11,7 +11,8 @@ public class Settings {
     public static int error_color;
     public static int bottomsheetcolor;
     public static int background_color;
-    public static String name;
+    public static String my_name;
+
 
 
 
@@ -24,6 +25,9 @@ public class Settings {
         colorAccent=Color.rgb(10,155,141);
         error_color=Color.rgb(200,70,80);
         bottomsheetcolor=Color.rgb(200,200,200);
+        background_color=Color.rgb(150,150,150);
+
+        my_name="Test";
     }
 
 
@@ -49,5 +53,13 @@ public class Settings {
 
     public static void setColorAccent(int colorAccent) {
         Settings.colorAccent = colorAccent;
+    }
+
+    public static void setBackground_color(int background_color) {
+        Settings.background_color = background_color;
+    }
+
+    public static void setMy_name(String my_name) {
+        Settings.my_name = my_name;
     }
 }

@@ -35,4 +35,8 @@ class WifiDevView extends LinearLayout {
         this.ippp.setText(ippp);
     }
 
+    public void set_name_dev(String dev){
+        this.dev.setText(dev);
+    }
+
 }

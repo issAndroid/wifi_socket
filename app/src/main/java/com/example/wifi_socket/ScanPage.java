@@ -1,19 +1,21 @@
 package com.example.wifi_socket;
 
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 public class ScanPage extends AppCompatActivity {
 
     WifiApManager wifiApManager;
-    GridView grid_dev;
-    ArrayList<WifiDevView> list;
-    Button ref;
+    static GridView grid_dev;
+    static ArrayList<WifiDevView> list;
+    static Button ref;
+    String dev_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,7 @@ public class ScanPage extends AppCompatActivity {
         wifiApManager=new WifiApManager(MainActivity.context);
         ref=(Button)findViewById(R.id.ref);
         grid_dev=(GridView) findViewById(R.id.grid_dev);
-        list = new ArrayList();
+        list=new ArrayList<>();
     }
 
 
@@ -50,11 +52,10 @@ public class ScanPage extends AppCompatActivity {
                 ArrayList<WifiDevView> arrayList = new ArrayList();
                 for (ClientScanResult clientScanResult : clients) {
                     final WifiDevView wifiDevView = new WifiDevView(MainActivity.context);
-                    wifiDevView.setValues(clientScanResult.getDevice(),clientScanResult.getIpAddr());
+                    wifiDevView.setValues(dev_name,clientScanResult.getIpAddr());
                     wifiDevView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-//                            Toast.makeText(ScanPage.this, wifiDevView.ippp.getText().toString(), Toast.LENGTH_SHORT).show();
                                MainActivity.http.setText(wifiDevView.ippp.getText().toString());
                                finish();
                         }
@@ -62,14 +63,27 @@ public class ScanPage extends AppCompatActivity {
                     arrayList.add(wifiDevView);
                 }
                 for (WifiDevView w:arrayList){
+                    w.set_name_dev(dev_name);
                     list.add(w);
-                    grid_dev.setAdapter(new MyGraidViewAdapter(list));
+                    set_devices_name();
                 }
+
+
             }
         });
     }
 
 
+    public void set_devices_name(){
+
+        for (int i=0; i<list.size(); i++) {
+            MessRes.commandHandler.get_target_name(MainActivity.getLocalIpAddress(),MainActivity.get_port(),list.get(i).ippp.getText().toString(),i);
+
+            if (list.get(i).dev.getText().toString().equals(""))
+                list.get(i).dev.setText("ناشناخته");
+            grid_dev.setAdapter(new MyGraidViewAdapter(list));
+        }
+    }
 
 }
 
