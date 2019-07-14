@@ -4,10 +4,6 @@ package com.example.wifi_socket;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -54,7 +50,6 @@ class MessRes extends Thread implements Runnable{
             }
         } catch (IOException e) {}
     }
-
 
 
 

@@ -23,9 +23,13 @@ public class CommandHandler {
             ScanPage.list.get(indesx).set_name_dev(p);
 
             ScanPage.grid_dev.invalidate();
+        }else if (command.substring(0,4).equals("file")){
+            res_file(command.substring(6));
         }
     }
 
+    private void res_file(String substring) {
+    }
 
 
     private void getname_command(String s) {
