@@ -28,12 +28,4 @@ public class UserMessages {
         MainActivity.mess_list.setAdapter(new MyGraidViewAdapter(list));
         MainActivity.mess_list.invalidate();
     }
-
-    public static ArrayList<MessageView> getList() {
-        return list;
-    }
-
-    public static MessageView get_last(){
-        return list.get(list.size()-1);
-    }
 }

@@ -84,9 +84,16 @@ class MessRes extends Thread implements Runnable{
             i++;
         }
 
-        ret[0]=s.substring(i+4);
+        ret[0]=getNameByIp(s.substring(i+4));
         ret[1]=s.substring(0,i-1);
 
         return ret;
+    }
+
+    public String getNameByIp(String ip){
+        int i = MainActivity.devices.indexOf(ip);
+        if (i>=0){
+            return MainActivity.devices.get(i+1);
+        }else return ip;
     }
 }

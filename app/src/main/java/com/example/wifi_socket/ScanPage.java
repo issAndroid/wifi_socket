@@ -45,6 +45,7 @@ public class ScanPage extends AppCompatActivity {
 
 
     private void scan() {
+        MainActivity.devices.removeAll(MainActivity.devices);
         wifiApManager.getClientList(false, new FinishScanListener() {
 
             @Override
@@ -68,7 +69,6 @@ public class ScanPage extends AppCompatActivity {
                     set_devices_name();
                 }
 
-
             }
         });
     }
@@ -82,6 +82,9 @@ public class ScanPage extends AppCompatActivity {
             if (list.get(i).dev.getText().toString().equals(""))
                 list.get(i).dev.setText("ناشناخته");
             grid_dev.setAdapter(new MyGraidViewAdapter(list));
+
+//                MainActivity.devices.add(list.get(i).ippp.getText().toString());
+//                MainActivity.devices.add(list.get(i).dev.getText().toString());
         }
     }
 

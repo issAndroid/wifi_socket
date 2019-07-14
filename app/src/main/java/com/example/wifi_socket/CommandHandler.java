@@ -19,8 +19,10 @@ public class CommandHandler {
             String p = command.substring(7);
             MainActivity.target_name=p;
             gettedname=p;
-
             ScanPage.list.get(indesx).set_name_dev(p);
+
+            MainActivity.devices.add(ScanPage.list.get(indesx).ippp.getText().toString());
+            MainActivity.devices.add(ScanPage.list.get(indesx).dev.getText().toString());
 
             ScanPage.grid_dev.invalidate();
         }else if (command.substring(0,4).equals("file")){
@@ -29,6 +31,18 @@ public class CommandHandler {
     }
 
     private void res_file(String substring) {
+        int i=0;
+        while (substring.charAt(i) != '*'){i++;}
+
+        String file_name = substring.substring(0,i);
+
+        int j=i+1;
+        while (substring.charAt(j) != '*'){j++;}
+
+        int size = Integer.valueOf(substring.substring(i+1,j));
+        String ip = substring.substring(j+1);
+
+        // pass to class,...
     }
 
 

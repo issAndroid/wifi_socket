@@ -1,5 +1,6 @@
 package com.example.wifi_socket;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -25,6 +26,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 public class MainActivity extends AppCompatActivity {
@@ -40,11 +42,24 @@ public class MainActivity extends AppCompatActivity {
     static TextView your_ip;
     public static String target_name;
     static CoordinatorLayout layout;
+    static ArrayList<String> devices;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        if (android.os.Build.VERSION.SDK_INT >= 23) {
+//            requestPermissions(new String[]{
+//                            Manifest.permission.INTERNET,
+//                            Manifest.permission.READ_EXTERNAL_STORAGE,
+//                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                            Manifest.permission.ACCESS_NETWORK_STATE},Context.);
+//        }
+
+
+
         this.context = getApplicationContext();
         Settings themeColor = new Settings();
         init();
@@ -138,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
         layout=(CoordinatorLayout) findViewById(R.id.coorlayout);
         mess_list = (GridView) findViewById(R.id.list_mess);
         your_ip=(TextView) findViewById(R.id.your_ip);
+        devices=new ArrayList<>();
         userMessages=new UserMessages();
         View bottomsheet = findViewById(R.id.bottomSheet);
         bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
