@@ -32,7 +32,7 @@ import java.util.Enumeration;
 public class MainActivity extends AppCompatActivity {
 
     public static boolean wifi_state=false, hotspot_state=false, ip_send_set=false;
-    static EditText http, port, message, myname;
+    static EditText http, message, myname;
     Button send, scan;
     static Context context;
     static GridView mess_list;
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "این که خودتی!", Toast.LENGTH_SHORT).show();
                 }else {
                     MessSend m = new MessSend();
-                    m.execute("true",get_mess(),get_ip(),get_port(),"false");
+                    m.execute("true",get_mess(),get_ip(),Settings.mess_port,"false");
                 }
             }
         });
@@ -147,7 +147,6 @@ public class MainActivity extends AppCompatActivity {
         send = (Button) findViewById(R.id.send);
         scan = (Button) findViewById(R.id.scan);
         http = (EditText) findViewById(R.id.http);
-        port = (EditText) findViewById(R.id.port);
         myname = (EditText) findViewById(R.id.myname);
         message = (EditText) findViewById(R.id.message);
         layout=(CoordinatorLayout) findViewById(R.id.coorlayout);
@@ -221,10 +220,6 @@ public class MainActivity extends AppCompatActivity {
             }
         } catch (SocketException ex) {}
         return null;
-    }
-
-    public static String get_port() {
-        return (port.getText().toString());
     }
 
     public static String get_ip() {

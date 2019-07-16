@@ -12,6 +12,8 @@ public class Settings {
     public static int bottomsheetcolor;
     public static int background_color;
     public static String my_name;
+    public static String mess_port;
+    public static String file_port;
 
 
 
@@ -26,6 +28,9 @@ public class Settings {
         error_color=Color.rgb(200,70,80);
         bottomsheetcolor=Color.rgb(200,200,200);
         background_color=Color.rgb(150,150,150);
+
+        mess_port="5000";
+        file_port="4000";
 
         my_name="Test";
     }

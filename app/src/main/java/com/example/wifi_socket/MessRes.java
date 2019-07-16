@@ -23,7 +23,7 @@ class MessRes extends Thread implements Runnable{
     public void run() {
         super.run();
         try {
-            sss=new ServerSocket(Integer.valueOf(MainActivity.get_port()));
+            sss=new ServerSocket(Integer.valueOf(Settings.mess_port));
             while (true){
                 sockets=sss.accept();
                 isr=new InputStreamReader(sockets.getInputStream());

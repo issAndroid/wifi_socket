@@ -77,7 +77,7 @@ public class ScanPage extends AppCompatActivity {
     public void set_devices_name(){
 
         for (int i=0; i<list.size(); i++) {
-            MessRes.commandHandler.get_target_name(MainActivity.getLocalIpAddress(),MainActivity.get_port(),list.get(i).ippp.getText().toString(),i);
+            MessRes.commandHandler.get_target_name(MainActivity.getLocalIpAddress(),Settings.mess_port,list.get(i).ippp.getText().toString(),i);
 
             if (list.get(i).dev.getText().toString().equals(""))
                 list.get(i).dev.setText("ناشناخته");
