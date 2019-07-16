@@ -7,7 +7,12 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.wifi.WifiManager;
+import android.os.Build;
+import android.os.Environment;
+import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +27,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -33,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static boolean wifi_state=false, hotspot_state=false, ip_send_set=false;
     static EditText http, message, myname;
-    Button send, scan;
+    Button send, scan, file;
     static Context context;
     static GridView mess_list;
     static UserMessages userMessages;
@@ -43,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     public static String target_name;
     static CoordinatorLayout layout;
     static ArrayList<String> devices;
+    static ArrayList<String> my_sends,my_rec;
 
 
     @Override
@@ -65,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 connection_state();
-                Toast.makeText(MainActivity.this, context.getResources().getString(R.string.refreshed) , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -102,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
             }else {
                 wifi_state=false;
-                your_ip.setText("Not Connected");
+                your_ip.setText(context.getResources().getString(R.string.not_connected));
                 your_ip.setTextColor(Settings.error_color);
 
             }
@@ -132,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String ip = http.getText().toString();
                 if (ip.equals("")){
-                    Toast.makeText(MainActivity.this, "اول گیرنده را مشخص کنید", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.receiver_not_found), Toast.LENGTH_SHORT).show();
                 }else if (ip.equals(your_ip.getText().toString())) {
-                    Toast.makeText(MainActivity.this, "این که خودتی!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.yourself), Toast.LENGTH_SHORT).show();
                 }else {
                     MessSend m = new MessSend();
                     m.execute("true",get_mess(),get_ip(),Settings.mess_port,"false");
@@ -146,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
     private  void init() {
         send = (Button) findViewById(R.id.send);
         scan = (Button) findViewById(R.id.scan);
+        file = (Button) findViewById(R.id.file);
         http = (EditText) findViewById(R.id.http);
         myname = (EditText) findViewById(R.id.myname);
         message = (EditText) findViewById(R.id.message);
@@ -161,11 +168,27 @@ public class MainActivity extends AppCompatActivity {
         mess_list.setBackgroundColor(Settings.background_color);
 
         if (getLocalIpAddress() != null)
-            your_ip.setText("your ip : "+getLocalIpAddress());
-        else your_ip.setText("Not Connected!!");
+            your_ip.setText(getLocalIpAddress());
+        else your_ip.setText(context.getResources().getString(R.string.not_connected));
 
         resize();
         myname_listener();
+        mkdir();
+
+
+
+        // for test
+        file.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+                chooseFile.setType("*/*");
+                chooseFile.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+                startActivityForResult(Intent.createChooser(chooseFile, "Choose a file"), 11);
+            }
+        });
+
+
     }
 
     private void myname_listener() {
@@ -246,4 +269,64 @@ public class MainActivity extends AppCompatActivity {
         screenhight=size.y;
         return screenhight-contop-actionbar-statusbar;
     }
+
+    private void mkdir() {
+        // for creating app's directory
+        File exdir = Environment.getExternalStorageDirectory();
+        File dir = new File(exdir,"WifiSocket");
+        if (! dir.exists()){
+            dir.mkdirs();
+            Toast.makeText(context, "created", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void send_file() {
+        for (String s : my_sends) {
+            File file = new File(s);
+            String command = "***file***"+file.getAbsolutePath()+"*"+file.length()+"*"+getLocalIpAddress();
+            MessSend m = new MessSend();
+            m.execute("false", command , get_ip(), Settings.file_port, "true");
+            FileSend fileSend = new FileSend();
+            fileSend.execute(s,get_ip(),Settings.file_port);
+        }
+    }
+
+
+
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        String ip = http.getText().toString();
+        if (ip.equals("")) {
+            Toast.makeText(MainActivity.this, context.getResources().getString(R.string.receiver_not_found), Toast.LENGTH_SHORT).show();
+        } else if (ip.equals(your_ip.getText().toString())) {
+            Toast.makeText(MainActivity.this, context.getResources().getString(R.string.yourself), Toast.LENGTH_SHORT).show();
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+            if (requestCode == 11 && resultCode == RESULT_OK && data != null) {
+
+                if (data.getClipData() != null) {
+
+                    int count = data.getClipData().getItemCount();
+                    for (int i = 0; i < count; i++) {
+
+                        Uri file_pa = data.getClipData().getItemAt(i).getUri();
+                        my_sends.add(file_pa.getPath());
+                    }
+                } else if (data.getData() != null) {
+
+                    Uri imgUri = data.getData();
+                    my_sends.add(imgUri.getPath());
+                }
+            }
+            send_file();
+        }
+    }
+
+
+
 }
