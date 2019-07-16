@@ -49,17 +49,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        if (android.os.Build.VERSION.SDK_INT >= 23) {
-//            requestPermissions(new String[]{
-//                            Manifest.permission.INTERNET,
-//                            Manifest.permission.READ_EXTERNAL_STORAGE,
-//                            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                            Manifest.permission.ACCESS_NETWORK_STATE},Context.);
-//        }
-
-
-
         this.context = getApplicationContext();
         Settings themeColor = new Settings();
         init();
@@ -71,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void connection_state() {
+
+        your_ip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                connection_state();
+                Toast.makeText(MainActivity.this, context.getResources().getString(R.string.refreshed) , Toast.LENGTH_SHORT).show();
+            }
+        });
 
         final WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         int apState = 0;
@@ -88,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             // Ap Enabled
             hotspot_state=true;
             your_ip.setText(getLocalIpAddress());
+            your_ip.setTextColor(Settings.colorAccent);
 
         }else {
 
@@ -99,11 +97,13 @@ public class MainActivity extends AppCompatActivity {
                 // wifi conected
                 wifi_state=true;
                 your_ip.setText(getLocalIpAddress());
+                your_ip.setTextColor(Settings.colorAccent);
+
 
             }else {
                 wifi_state=false;
                 your_ip.setText("Not Connected");
-                your_ip.setTextColor(Color.RED);
+                your_ip.setTextColor(Settings.error_color);
 
             }
 

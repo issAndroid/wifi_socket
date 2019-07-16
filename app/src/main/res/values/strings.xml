@@ -4,4 +4,5 @@
     <string name="send_error">[ارسال نشد]</string>
     <string name="null_command">//////////</string>
     <string name="unknowndev">ناشناخته</string>
+    <string name="refreshed">تازه شد!</string>
 </resources>
