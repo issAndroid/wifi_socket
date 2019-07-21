@@ -2,11 +2,10 @@
 <LinearLayout
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#222"
     tools:context=".ScanPage">
 
     <android.support.v7.widget.AppCompatButton
@@ -14,6 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ref"
         android:text="Refresh"
+        android:textSize="18sp"
         android:textAllCaps="false"
         android:textColor="#fff"
         android:background="@drawable/btn_app"/>

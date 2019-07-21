@@ -17,13 +17,12 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="29sp"
-            android:textColor="@color/colorAccent"
             android:background="@color/colorPrimaryDark"
             android:textAlignment="center"
             android:id="@+id/your_ip"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:padding="2sp"
             android:text="your ip :"/>
 
@@ -34,6 +33,7 @@
             android:textColor="#fff"
             android:background="@drawable/btn_app"
             android:text="Scan"
+            android:textSize="18sp"
             android:textAllCaps="false" />
 
 
@@ -101,10 +101,24 @@
                     android:layout_marginEnd="-48dp"
                     android:layout_marginRight="-48dp"
                     android:background="@drawable/btn_send"
-                    android:text=">>"
                     android:textAllCaps="false"
                     android:textColor="#fff"
+                    android:visibility="gone"
                     app:layout_constraintTop_toBottomOf="@+id/message" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/file"
+                    android:layout_width="40sp"
+                    android:layout_height="40sp"
+                    android:layout_alignTop="@+id/message"
+                    android:layout_alignEnd="@+id/message"
+                    android:layout_alignRight="@+id/message"
+                    android:layout_marginTop="-2dp"
+                    android:layout_marginEnd="-50dp"
+                    android:layout_marginRight="-42dp"
+                    app:layout_constraintTop_toBottomOf="@+id/message"
+                    android:background="@drawable/btn_file" />
+
 
             </RelativeLayout>
 
@@ -115,25 +129,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:hint="Ip"
+                android:visibility="gone"
                 android:layout_marginEnd="50sp"
                 android:layout_marginRight="50sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
 
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="My Name"
-                android:id="@+id/myname"
-                android:layout_marginEnd="50sp"
-                android:layout_marginRight="50sp"/>
 
-            <android.support.v7.widget.AppCompatButton
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="file"
-                android:id="@+id/file"/>
+
+                <EditText
+                    android:id="@+id/myname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50sp"
+                    android:layout_marginRight="50sp"
+                    android:hint="My Name" />
+
+
+
+
 
             <ProgressBar
                 android:id="@+id/progressBar2"
@@ -142,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:indeterminate="false"
                 android:max="100"
-                android:secondaryProgress="25"/>
+                android:secondaryProgress="100" />
 
 
         </LinearLayout>

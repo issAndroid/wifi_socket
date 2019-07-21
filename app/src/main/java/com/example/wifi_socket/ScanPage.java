@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+
 import java.util.ArrayList;
 
 public class ScanPage extends AppCompatActivity {
@@ -14,6 +16,7 @@ public class ScanPage extends AppCompatActivity {
     static ArrayList<WifiDevView> list;
     static Button ref;
     String dev_name;
+    LinearLayout linearLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,8 @@ public class ScanPage extends AppCompatActivity {
         ref.setText(getResources().getString(R.string.refresh));
         grid_dev=(GridView) findViewById(R.id.grid_dev);
         list=new ArrayList<>();
+        linearLayout=findViewById(R.id.root);
+        linearLayout.setBackgroundColor(Settings.scanpage_background_color);
     }
 
 

@@ -1,11 +1,13 @@
 package com.example.wifi_socket;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -76,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(getBaseContext(), NetworkRes.class));
     }
 
+    @SuppressLint("ResourceAsColor")
     private void connection_state() {
 
         your_ip.setOnClickListener(new View.OnClickListener() {
@@ -184,6 +187,7 @@ public class MainActivity extends AppCompatActivity {
             your_ip.setText(getLocalIpAddress());
         else your_ip.setText(context.getResources().getString(R.string.not_connected));
         resize();
+        myname.setText(Settings.my_name);
         myname_listener();
         mkdir();
 
@@ -254,6 +258,15 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence cs, int s, int b, int c) {
                 if (message.getLineCount() > 1)
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
+
+                if (message.getText().toString().equals("")) {
+                    file.setVisibility(View.VISIBLE);
+                    send.setVisibility(View.GONE);
+                }else {
+                    send.setVisibility(View.VISIBLE);
+                    file.setVisibility(View.GONE);
+                }
+
             }
         });
 
