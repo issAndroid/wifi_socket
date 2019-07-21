@@ -1,6 +1,5 @@
 package com.example.wifi_socket;
 
-import android.widget.Toast;
 
 public class CommandHandler {
     String command;
@@ -26,7 +25,7 @@ public class CommandHandler {
 
             ScanPage.grid_dev.invalidate();
         }else if (command.substring(0,4).equals("file")){
-            res_file(command.substring(6));
+            res_file(command.substring(7));
         }
     }
 
@@ -43,6 +42,9 @@ public class CommandHandler {
         String ip = substring.substring(j+1);
 
         // pass to class,...
+        FileRec fileRec = new FileRec();
+        fileRec.setValues(file_name,size,ip);
+        fileRec.start();
     }
 
 

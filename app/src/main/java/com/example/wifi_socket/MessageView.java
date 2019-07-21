@@ -42,6 +42,11 @@ public class MessageView extends LinearLayout {
     }
 
 
+    public void set_text_colot(int color1, int color2){
+        this.ip.setTextColor(color1);
+        this.message.setTextColor(color2);
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public void set_Color(int color, boolean gr){
         LinearLayout layout = this.rootView.findViewById(R.id.rootview);
@@ -56,7 +61,6 @@ public class MessageView extends LinearLayout {
 
         GradientDrawable gradientDrawable = new GradientDrawable();
         gradientDrawable.setCornerRadii(new float[]{20, 20, 0, 0, 40, 40, 20, 20});
-//        gradientDrawable.set
         gradientDrawable.setColor(color);
         return gradientDrawable;
     }

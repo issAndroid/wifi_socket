@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
 public class ScanPage extends AppCompatActivity {
@@ -39,6 +37,7 @@ public class ScanPage extends AppCompatActivity {
     private void init() {
         wifiApManager=new WifiApManager(MainActivity.context);
         ref=(Button)findViewById(R.id.ref);
+        ref.setText(getResources().getString(R.string.refresh));
         grid_dev=(GridView) findViewById(R.id.grid_dev);
         list=new ArrayList<>();
     }
@@ -82,9 +81,6 @@ public class ScanPage extends AppCompatActivity {
             if (list.get(i).dev.getText().toString().equals(""))
                 list.get(i).dev.setText("ناشناخته");
             grid_dev.setAdapter(new MyGraidViewAdapter(list));
-
-//                MainActivity.devices.add(list.get(i).ippp.getText().toString());
-//                MainActivity.devices.add(list.get(i).dev.getText().toString());
         }
     }
 

@@ -2,11 +2,16 @@
     <string name="app_name">wifi_socket</string>
     <string name="send_me">[خودم]</string>
     <string name="send_error">[ارسال نشد]</string>
+    <string name="rec_error">[دریافت نشد]</string>
     <string name="null_command">//////////</string>
     <string name="unknowndev">ناشناخته</string>
     <string name="refreshed">تازه شد!</string>
     <string name="not_listen">کسی گوش نمی ده!</string>
-    <string name="not_connected">وصل نشد</string>
+    <string name="not_connected">وصل نشد [تلاش مجدد]</string>
     <string name="receiver_not_found">اول گیرنده را مشخص کنید</string>
     <string name="yourself">این که خودتی!</string>
+    <string name="m">برای ادامه کار اجازه دهید</string>
+    <string name="filecreated">فایل برنامه ساخته شد</string>
+    <string name="scan">اسکن</string>
+    <string name="refresh">تازه سازی</string>
 </resources>
