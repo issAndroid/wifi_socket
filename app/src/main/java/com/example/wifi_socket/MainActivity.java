@@ -359,11 +359,18 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
 
             if (resultData != null) {
-//                my_sends.add("/ff/"+message.getText().toString());
-                String s=getPathFromURI(resultData.getData());
-                my_sends.add(s);
+                String ip = http.getText().toString();
+                if (ip.equals("")) {
+                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.receiver_not_found), Toast.LENGTH_SHORT).show();
+                } else if (ip.equals(your_ip.getText().toString())) {
+                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.yourself), Toast.LENGTH_SHORT).show();
+                } else {
 
-               send_file();
+                    //to sending
+                    String s = getPathFromURI(resultData.getData());
+                    my_sends.add(s);
+                    send_file();
+                }
             }
         }
     }
