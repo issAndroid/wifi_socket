@@ -33,6 +33,12 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.developer.filepicker.controller.DialogSelectionListener;
+import com.developer.filepicker.model.DialogConfigs;
+import com.developer.filepicker.model.DialogProperties;
+import com.developer.filepicker.view.FilePickerDialog;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -48,9 +54,11 @@ import java.util.Enumeration;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static boolean wifi_state = false, hotspot_state = false, ip_send_set = false;
+    public static boolean wifi_state = false, hotspot_state = false, sending_state = false;
     static EditText http, message, myname;
-    Button send, scan, file;
+    Button send;
+    Button scan;
+    static Button file;
     static Context context;
     static GridView mess_list;
     static UserMessages userMessages;
@@ -174,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
         layout = (CoordinatorLayout) findViewById(R.id.coorlayout);
         mess_list = (GridView) findViewById(R.id.list_mess);
         your_ip = (TextView) findViewById(R.id.your_ip);
-        progressBar=findViewById(R.id.progressBar2);
+        progressBar = findViewById(R.id.progressBar2);
         devices = new ArrayList<>();
         userMessages = new UserMessages();
         View bottomsheet = findViewById(R.id.bottomSheet);
@@ -190,23 +198,47 @@ public class MainActivity extends AppCompatActivity {
         myname.setText(Settings.my_name);
         myname_listener();
         mkdir();
+        pick_file_to_send();
+    }
 
-
-
-
-        // for test
+    private void pick_file_to_send() {
+        //for picking file , adding to send list and call send method
         file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent intent = new Intent();
-                    intent.setType("*/*");
-                    intent.putExtra(DocumentsContract.EXTRA_INITIAL_URI,"");
-                    intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
-                    startActivityForResult(intent, 1);
+                String ip = http.getText().toString();
+                if (ip.equals("")) {
+                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.receiver_not_found), Toast.LENGTH_SHORT).show();
+                } else if (ip.equals(your_ip.getText().toString())) {
+                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.yourself), Toast.LENGTH_SHORT).show();
+                } else {
+
+
+                    DialogProperties properties = new DialogProperties();
+                    properties.selection_mode = DialogConfigs.MULTI_MODE;
+                    properties.root = new File(Environment.getExternalStorageDirectory().getPath());
+                    FilePickerDialog dialog = new FilePickerDialog(MainActivity.this, properties);
+                    dialog.setTitle(context.getResources().getString(R.string.select_a_file));
+
+                    dialog.setDialogSelectionListener(new DialogSelectionListener() {
+                        @Override
+                        public void onSelectedFilePaths(String[] files) {
+                            //files is the array of the paths of files selected by the Application User.
+                            for (String s : files) {
+                                if (s != null) {
+                                    my_sends.add(s);
+                                }
+                            }
+                            file.setClickable(false);
+                            send_file();
+                        }
+                    });
+                    dialog.show();
+
+                }
             }
         });
     }
-
 
 
     public boolean isStoragePermissionGranted() {
@@ -262,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 if (message.getText().toString().equals("")) {
                     file.setVisibility(View.VISIBLE);
                     send.setVisibility(View.GONE);
-                }else {
+                } else {
                     send.setVisibility(View.VISIBLE);
                     file.setVisibility(View.GONE);
                 }
@@ -328,64 +360,30 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void send_file() {
-        for (String s : my_sends) {
-            String path = Environment.getExternalStorageDirectory().getPath() + s;
-            File help = new File(path);
-            int si = (int) help.length();
-            String command = "***file***" + after_last_slash(s) +"*" + si + "*" + getLocalIpAddress();
-            MessSend m = new MessSend();
-            //sending command
-            m.execute("false", command, get_ip(), Settings.mess_port, "true");
-            try {
-                Thread.sleep(200);
-            } catch (Exception e) {}
-            //sending file
-            FileSend fileSend = new FileSend();
-            fileSend.execute(path, get_ip());
-            MainActivity.my_sends.remove(0);
+    public static void send_file() {
+        String path = my_sends.get(0);
+        File help = new File(path);
+        int si = (int) help.length();
+        String command = "***file***" + after_last_slash(my_sends.get(0)) + "*" + si + "*" + getLocalIpAddress();
+        MessSend m = new MessSend();
+        //sending command
+        m.execute("false", command, get_ip(), Settings.mess_port, "true");
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
         }
-        my_sends.removeAll(my_sends);
+        //sending file
+        FileSend fileSend = new FileSend();
+        fileSend.execute(path, get_ip());
+        my_sends.remove(0);
     }
 
-    public String after_last_slash(String s){
-        int t = s.length()-1;
-        while (s.charAt(t)!='/' && t>0){t--;}
-        return s.substring(t+1);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent resultData) {
-        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-
-            if (resultData != null) {
-                String ip = http.getText().toString();
-                if (ip.equals("")) {
-                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.receiver_not_found), Toast.LENGTH_SHORT).show();
-                } else if (ip.equals(your_ip.getText().toString())) {
-                    Toast.makeText(MainActivity.this, context.getResources().getString(R.string.yourself), Toast.LENGTH_SHORT).show();
-                } else {
-
-                    //to sending
-                    String s = getPathFromURI(resultData.getData());
-                    my_sends.add(s);
-                    send_file();
-                }
-            }
+    public static String after_last_slash(String s) {
+        int t = s.length() - 1;
+        while (s.charAt(t) != '/' && t > 0) {
+            t--;
         }
-    }
-
-
-    public String getPathFromURI(Uri contentUri) {
-        String res = "";
-        String[] proj = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
-        if (cursor.moveToFirst()) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            res = cursor.getString(column_index);
-        }
-        cursor.close();
-        return res;
+        return s.substring(t + 1);
     }
 
 }

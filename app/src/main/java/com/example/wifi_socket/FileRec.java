@@ -80,7 +80,7 @@ class FileRec extends Thread implements Runnable {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    UserMessages.add_file(ip,fileneme);
+                    UserMessages.add_file(getNameByIp(ip),fileneme);
                 }
             });
 
@@ -92,6 +92,13 @@ class FileRec extends Thread implements Runnable {
                 }
             });
         }
+    }
+
+    public String getNameByIp(String ip){
+        int i = MainActivity.devices.indexOf(ip);
+        if (i>=0){
+            return MainActivity.devices.get(i+1);
+        }else return ip;
     }
 
     class MyAs extends AsyncTask<Void,Void,Void>{

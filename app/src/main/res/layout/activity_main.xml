@@ -85,39 +85,39 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="50sp"
-                    android:layout_marginRight="50sp"
-                    android:hint="message"
+                    android:layout_marginEnd="35sp"
+                    android:layout_marginRight="35sp"
+                    android:hint=" پیام "
                     tools:layout_editor_absoluteX="0dp" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/send"
-                    android:layout_width="40sp"
-                    android:layout_height="40sp"
+                    android:layout_width="33sp"
+                    android:layout_height="33sp"
                     android:layout_alignTop="@+id/message"
                     android:layout_alignEnd="@+id/message"
                     android:layout_alignRight="@+id/message"
-                    android:layout_marginTop="-2dp"
-                    android:layout_marginEnd="-48dp"
-                    android:layout_marginRight="-48dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginEnd="-34dp"
+                    android:layout_marginRight="-34dp"
                     android:background="@drawable/btn_send"
                     android:textAllCaps="false"
-                    android:textColor="#fff"
                     android:visibility="gone"
+                    android:textColor="#fff"
                     app:layout_constraintTop_toBottomOf="@+id/message" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/file"
-                    android:layout_width="40sp"
-                    android:layout_height="40sp"
+                    android:layout_width="35sp"
+                    android:layout_height="35sp"
                     android:layout_alignTop="@+id/message"
                     android:layout_alignEnd="@+id/message"
                     android:layout_alignRight="@+id/message"
-                    android:layout_marginTop="-2dp"
-                    android:layout_marginEnd="-50dp"
-                    android:layout_marginRight="-42dp"
-                    app:layout_constraintTop_toBottomOf="@+id/message"
-                    android:background="@drawable/btn_file" />
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="-33dp"
+                    android:layout_marginRight="-33dp"
+                    android:background="@drawable/btn_file"
+                    app:layout_constraintTop_toBottomOf="@+id/message" />
 
 
             </RelativeLayout>
@@ -128,10 +128,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="Ip"
                 android:visibility="gone"
-                android:layout_marginEnd="50sp"
-                android:layout_marginRight="50sp"
+                android:layout_marginEnd="35sp"
+                android:layout_marginRight="35sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
 
@@ -142,9 +141,9 @@
                     android:id="@+id/myname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="50sp"
-                    android:layout_marginRight="50sp"
-                    android:hint="My Name" />
+                    android:layout_marginEnd="35sp"
+                    android:layout_marginRight="35sp"
+                    android:hint="نام من" />
 
 
 

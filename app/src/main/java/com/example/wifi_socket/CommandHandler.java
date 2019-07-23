@@ -1,5 +1,6 @@
 package com.example.wifi_socket;
 
+import android.widget.Toast;
 
 public class CommandHandler {
     String command;
@@ -46,6 +47,7 @@ public class CommandHandler {
         fileRec.setValues(file_name,size,ip);
         fileRec.start();
     }
+
 
 
     private void getname_command(String s) {

@@ -1,6 +1,5 @@
 package com.example.wifi_socket;
 
-import android.icu.util.TimeZone;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.widget.Toast;
@@ -22,7 +21,7 @@ public class UserMessages {
             m.set_Color(Settings.send_me,true);
         }else if (ip.equals(MainActivity.context.getResources().getString(R.string.send_error))){
             m.set_Color(Settings.send_error,true);
-            Toast.makeText(MainActivity.context, "کسی گوش نمیده!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.context,MainActivity.context.getResources().getString(R.string.not_listen) , Toast.LENGTH_SHORT).show();
         }else {
             m.set_Color(Settings.send_accepted,false);
         }
@@ -41,10 +40,10 @@ public class UserMessages {
             fv.set_Color(Settings.file_send_me,true);
         }else if (ip.equals(MainActivity.context.getResources().getString(R.string.send_error))) {
             fv.set_Color(Settings.file_send_error, true);
-            Toast.makeText(MainActivity.context, "کسی گوش نمیده!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.context, MainActivity.context.getResources().getString(R.string.not_listen), Toast.LENGTH_SHORT).show();
         }else if (ip.equals(MainActivity.context.getResources().getString(R.string.rec_error))){
             fv.set_Color(Settings.file_send_error, true);
-            Toast.makeText(MainActivity.context, "دریافت نشد", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.context,  MainActivity.context.getResources().getString(R.string.not_received), Toast.LENGTH_SHORT).show();
         }else {
             fv.set_Color(Settings.file_send_accepted,false);
         }

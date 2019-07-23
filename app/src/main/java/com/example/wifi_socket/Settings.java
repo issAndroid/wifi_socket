@@ -52,7 +52,7 @@ public class Settings {
         bottomsheetcolor=Color.rgb(200,200,200);
         background_color=Color.rgb(150,150,150);
 
-        scanpage_background_color=Color.rgb(60,60,60);
+        scanpage_background_color=Color.rgb(100,100,100);
 
         mess_port="5000";
         file_port="4000";

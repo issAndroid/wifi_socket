@@ -4,7 +4,6 @@ package com.example.wifi_socket;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -44,7 +43,7 @@ class MessRes extends Thread implements Runnable{
                             else
                                 UserMessages.add_message("Ip: Unknown", con[1]);
                         }else {
-                                commandHandler = new CommandHandler(get_command(str));
+                            commandHandler = new CommandHandler(get_command(str));
                         }
                     }
                 });

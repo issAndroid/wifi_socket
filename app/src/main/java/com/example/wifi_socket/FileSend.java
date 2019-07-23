@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 import static com.example.wifi_socket.FileRec.count;
+import static java.lang.Thread.MAX_PRIORITY;
 import static java.lang.Thread.sleep;
 
 
@@ -28,17 +29,10 @@ public class FileSend extends AsyncTask<String,Void,Void> {
         //do somethings
         final String path = strings[0];
         String ip = strings[1];
-        File file = new File(path);
+        final File file = new File(path);
         length =(int) file.length();
-        handler.post(new Runnable() {
-            @Override
-            public void run() {
-                new MyAs().execute();
-            }
-        });
 
-        try {
-
+            try{
             socket = new Socket(ip, Integer.valueOf(Settings.file_port));
             byte[] bytes = new byte[length];
             InputStream in = new FileInputStream(path);
@@ -53,11 +47,14 @@ public class FileSend extends AsyncTask<String,Void,Void> {
             in.close();
             socket.close();
 
+
+
             handler.post(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                 @Override
                 public void run() {
                     UserMessages.add_file(MainActivity.context.getResources().getString(R.string.send_me),next_of_zero(path));
+
                 }
             });
         } catch (final IOException e) {
@@ -72,6 +69,20 @@ public class FileSend extends AsyncTask<String,Void,Void> {
         }
 
         return null;
+    }
+
+
+    @Override
+    protected void onPostExecute(Void aVoid) {
+        super.onPostExecute(aVoid);
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                if (MainActivity.my_sends.size()!=0)
+                    MainActivity.send_file();
+                else MainActivity.file.setClickable(true);
+            }
+        });
     }
 
     class MyAs extends AsyncTask<Void,Void,Void>{

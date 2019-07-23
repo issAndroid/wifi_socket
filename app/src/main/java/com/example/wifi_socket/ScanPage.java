@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public class ScanPage extends AppCompatActivity {
     static ArrayList<WifiDevView> list;
     static Button ref;
     String dev_name;
-    LinearLayout linearLayout;
+    LinearLayout root;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,10 @@ public class ScanPage extends AppCompatActivity {
     private void init() {
         wifiApManager=new WifiApManager(MainActivity.context);
         ref=(Button)findViewById(R.id.ref);
-        ref.setText(getResources().getString(R.string.refresh));
         grid_dev=(GridView) findViewById(R.id.grid_dev);
         list=new ArrayList<>();
-        linearLayout=findViewById(R.id.root);
-        linearLayout.setBackgroundColor(Settings.scanpage_background_color);
+        root=(LinearLayout) findViewById(R.id.root);
+        root.setBackgroundColor(Settings.scanpage_background_color);
     }
 
 
@@ -61,8 +61,8 @@ public class ScanPage extends AppCompatActivity {
                     wifiDevView.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                               MainActivity.http.setText(wifiDevView.ippp.getText().toString());
-                               finish();
+                            MainActivity.http.setText(wifiDevView.ippp.getText().toString());
+                            finish();
                         }
                     });
                     arrayList.add(wifiDevView);
@@ -86,8 +86,10 @@ public class ScanPage extends AppCompatActivity {
             if (list.get(i).dev.getText().toString().equals(""))
                 list.get(i).dev.setText("ناشناخته");
             grid_dev.setAdapter(new MyGraidViewAdapter(list));
+
+//                MainActivity.devices.add(list.get(i).ippp.getText().toString());
+//                MainActivity.devices.add(list.get(i).dev.getText().toString());
         }
     }
 
 }
-

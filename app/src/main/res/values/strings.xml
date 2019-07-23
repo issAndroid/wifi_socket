@@ -14,4 +14,7 @@
     <string name="filecreated">فایل برنامه ساخته شد</string>
     <string name="scan">اسکن</string>
     <string name="refresh">تازه سازی</string>
+    <string name="select_a_file">انتخاب فایل برای ارسال</string>
+    <string name="not_received">دریافت نشد</string>
+    <string name="command_not_fount">دستور نامعتبر</string>
 </resources>
