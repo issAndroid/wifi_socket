@@ -2,22 +2,15 @@ package com.example.wifi_socket;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
@@ -40,9 +33,6 @@ import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -57,18 +47,17 @@ public class MainActivity extends AppCompatActivity {
     public static boolean wifi_state = false, hotspot_state = false, sending_state = false;
     static EditText http, message, myname;
     Button send;
-    Button scan;
+    Button scan, settings;
     static Button file;
     static Context context;
     static GridView mess_list;
     static UserMessages userMessages;
-    View bottomsheet;
     BottomSheetBehavior bottomSheetBehavior;
     static TextView your_ip;
     public static String target_name;
     static CoordinatorLayout layout;
     static ArrayList<String> devices;
-    static ArrayList<String> my_sends, my_rec;
+    static ArrayList<String> my_sends;
     static ProgressBar progressBar;
 
 
@@ -84,6 +73,16 @@ public class MainActivity extends AppCompatActivity {
         scanpage();
         connection_state();
         startService(new Intent(getBaseContext(), NetworkRes.class));
+        settings_page();
+    }
+
+    private void settings_page() {
+        this.settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,SettingsActivity.class));
+            }
+        });
     }
 
     @SuppressLint("ResourceAsColor")
@@ -173,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         isStoragePermissionGranted();
         send = (Button) findViewById(R.id.send);
+        settings = (Button) findViewById(R.id.settings);
         scan = (Button) findViewById(R.id.scan);
         scan.setText(getResources().getString(R.string.scan));
         file = (Button) findViewById(R.id.file);
@@ -240,7 +240,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-
     public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            Toast.makeText(context,context.getResources().getString(R.string.m), Toast.LENGTH_SHORT).show();
@@ -277,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
     private void resize() {
         double h = (double) getDisplyHeight();
         bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setPeekHeight((int) Math.floor(0.1 * h) + 20);
+        bottomSheetBehavior.setPeekHeight((int) Math.floor(0.11 * h));
 
         message.addTextChangedListener(new TextWatcher() {
 

@@ -113,8 +113,8 @@
                     android:layout_alignEnd="@+id/message"
                     android:layout_alignRight="@+id/message"
                     android:layout_marginTop="2dp"
-                    android:layout_marginEnd="-34dp"
-                    android:layout_marginRight="-34dp"
+                    android:layout_marginEnd="-37dp"
+                    android:layout_marginRight="-37dp"
                     android:background="@drawable/btn_send"
                     android:textAllCaps="false"
                     android:visibility="gone"
@@ -129,8 +129,8 @@
                     android:layout_alignEnd="@+id/message"
                     android:layout_alignRight="@+id/message"
                     android:layout_marginTop="3dp"
-                    android:layout_marginEnd="-33dp"
-                    android:layout_marginRight="-33dp"
+                    android:layout_marginEnd="-37dp"
+                    android:layout_marginRight="-37dp"
                     android:background="@drawable/btn_file"
                     app:layout_constraintTop_toBottomOf="@+id/message" />
 
@@ -147,20 +147,33 @@
                 android:hint="ip گیرنده"
                 android:textAlignment="textEnd"
                 android:layout_marginEnd="35sp"
-                android:layout_marginRight="35sp"
+                android:layout_marginRight="40sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
 
 
 
-
-                <EditText
-                    android:id="@+id/myname"
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="35sp"
-                    android:layout_marginRight="35sp"
-                    android:hint="نام من" />
+                    android:layout_height="wrap_content">
+                    <EditText
+                        android:id="@+id/myname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="35sp"
+                        android:layout_marginRight="40sp"
+                        android:hint="نام من" />
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:layout_width="33sp"
+                        android:id="@+id/settings"
+                        android:layout_height="33sp"
+                        android:layout_alignTop="@+id/myname"
+                        android:layout_marginStart="-37dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_toEndOf="@+id/myname"
+                        android:background="@drawable/setting_btn" />
+                </RelativeLayout>
 
         </LinearLayout>
 

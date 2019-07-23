@@ -1,5 +1,7 @@
 package com.example.wifi_socket;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 
 public class Settings {
@@ -11,7 +13,6 @@ public class Settings {
     public static int text_color2;
     public static int file_text_color1;
     public static int file_text_color2;
-
     public static int file_send_me;
     public static int file_send_accepted;
     public static int file_send_error;
@@ -23,73 +24,128 @@ public class Settings {
     public static String my_name;
     public static String mess_port;
     public static String file_port;
-
-
-
-
+    SharedPreferences preferences;
+    static SharedPreferences.Editor editor;
 
 
     public Settings() {
+        preferences=MainActivity.context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
+        editor = preferences.edit();
         // for message
-        send_me=Color.rgb(64,121,121);
-        send_accepted =Color.rgb(112,112,112);
-        send_error=Color.rgb(135,74,88);
+        send_me=preferences.getInt("send_me",Color.rgb(64,121,121));
+        send_accepted =preferences.getInt("send_accepted",Color.rgb(112,112,112));
+        send_error=preferences.getInt("send_error",Color.rgb(135,74,88));
         //1 title   2 context
-        text_color1=Color.rgb(200,200,200);
-        text_color2=Color.rgb(250,250,250);
+        text_color1=preferences.getInt("text_color1",Color.rgb(200,200,200));
+        text_color2=preferences.getInt("text_color2",Color.rgb(250,250,250));
         //for file
-        file_send_me=Color.rgb(64,121,121);
-        file_send_accepted =Color.rgb(112,112,112);
-        file_send_error=Color.rgb(135,74,88);
+        file_send_me=preferences.getInt("file_send_me",Color.rgb(64,121,121));
+        file_send_accepted =preferences.getInt("file_send_accepted",Color.rgb(112,112,112));
+        file_send_error=preferences.getInt("file_send_error",Color.rgb(135,74,88));
         // 1 title   2 context
-        file_text_color1=Color.rgb(50,50,50);
-        file_text_color2=Color.rgb(0,0,0);
-
-
-
-        colorAccent=Color.rgb(10,155,141);
-        error_color=Color.rgb(200,70,80);
-        bottomsheetcolor=Color.rgb(200,200,200);
-        background_color=Color.rgb(150,150,150);
-
-        scanpage_background_color=Color.rgb(100,100,100);
-
-        mess_port="5000";
-        file_port="4000";
-
-        my_name="Test";
+        file_text_color1=preferences.getInt("file_text_color1",Color.rgb(50,50,50));
+        file_text_color2=preferences.getInt("file_text_color2",Color.rgb(0,0,0));
+        colorAccent=preferences.getInt("colorAccent",Color.rgb(10,155,141));
+        error_color=preferences.getInt("error_color",Color.rgb(200,70,80));
+        bottomsheetcolor=preferences.getInt("bottomsheetcolor",Color.rgb(200,200,200));
+        background_color=preferences.getInt("background_color",Color.rgb(150,150,150));
+        scanpage_background_color=preferences.getInt("scanpage_background_color",Color.rgb(100,100,100));
+        mess_port=preferences.getString("mess_port","5000");
+        file_port=preferences.getString("file_port","4000");
+        my_name=preferences.getString("my_name","Test");
     }
 
 
     public static void setBottomsheetcolor(int bottomsheetcolor) {
-        Settings.bottomsheetcolor = bottomsheetcolor;
+        editor.putInt("bottomsheetcolor",bottomsheetcolor);
+        editor.apply();
     }
 
+
     public static void setSend_me(int send_me) {
-        Settings.send_me = send_me;
+        editor.putInt("send_me",send_me);
+        editor.apply();
     }
 
     public static void setError_color(int error_color) {
-        Settings.error_color = error_color;
+        editor.putInt("error_color",error_color);
+        editor.apply();
     }
 
     public static void setSend_accepted(int send_accepted) {
-        Settings.send_accepted = send_accepted;
+        editor.putInt("send_accepted",send_accepted);
+        editor.apply();
     }
 
     public static void setSend_error(int send_error) {
-        Settings.send_error = send_error;
+        editor.putInt("Send_error",send_error);
+        editor.apply();
+    }
+
+    public static void setFile_text_color1(int file_text_color1) {
+        editor.putInt("file_text_color1",file_text_color1);
+        editor.apply();
+    }
+
+    public static void setFile_text_color2(int file_text_color2) {
+        editor.putInt("file_text_color2",file_text_color2);
+        editor.apply();
+    }
+
+    public static void setFile_send_me(int file_send_me) {
+        editor.putInt("file_send_me",file_send_me);
+        editor.apply();
+
+    }
+
+    public static void setFile_send_accepted(int file_send_accepted) {
+        editor.putInt("file_send_accepted",file_send_accepted);
+        editor.apply();
+
+    }
+
+    public static void setFile_send_error(int file_send_error) {
+        editor.putInt("file_send_error",file_send_error);
+        editor.apply();
+    }
+
+    public static void setScanpage_background_color(int scanpage_background_color) {
+        editor.putInt("scanpage_background_color",scanpage_background_color);
+        editor.apply();
+    }
+
+    public static void setMess_port(String mess_port) {
+        editor.putString("mess_port",mess_port);
+        editor.apply();
+    }
+
+    public static void setFile_port(String file_port) {
+        editor.putString("file_port",file_port);
+        editor.apply();
     }
 
     public static void setColorAccent(int colorAccent) {
-        Settings.colorAccent = colorAccent;
+        editor.putInt("colorAccent",colorAccent);
+        editor.apply();
     }
 
     public static void setBackground_color(int background_color) {
-        Settings.background_color = background_color;
+        editor.putInt("background_color",background_color);
+        editor.apply();
     }
 
     public static void setMy_name(String my_name) {
-        Settings.my_name = my_name;
+        editor.putString("my_name",my_name);
+        editor.apply();
+    }
+
+    public static void setText_color1(int text_color1) {
+        editor.putInt("text_color1", text_color1);
+        editor.apply();
+    }
+
+    public static void setText_color2(int text_color2) {
+        editor.putInt("text_color2",text_color2);
+        editor.apply();
     }
 }
