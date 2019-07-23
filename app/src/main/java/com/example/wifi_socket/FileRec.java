@@ -3,11 +3,6 @@ package com.example.wifi_socket;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
-import android.os.RecoverySystem;
-import android.util.Log;
-import android.widget.Toast;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,36 +34,10 @@ class FileRec extends Thread implements Runnable {
             ss=new ServerSocket(Integer.valueOf(Settings.file_port));
             s=ss.accept();
             is=s.getInputStream();
-            name = Environment.getExternalStorageDirectory().getPath()+"/WifiSocket/"+fileneme;
+            name = Environment.getExternalStorageDirectory().getPath()+"/WifiSocket/"+dir_by_type(fileneme)+"/"+fileneme;
             os=new FileOutputStream(name);
             byte[] bytes = new byte[size];
-
-
-
-//            while (t<5000) {
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        // Run your task here
-//                        File file = new File(name);
-////                        MainActivity.message.append(file.length() + "**");
-////                        double d = (double) file.length()/size *100;
-////                        MainActivity.progressBar.setProgress((int)d);
-////                        MainActivity.message.append(file.length() + "/"+size+"\n");
-//                        Log.w("filellllll",file.length()+"/"+size);
-//                        t++;
-//
-////                        try {
-////                            sleep(100);
-////                        } catch (InterruptedException e) {}
-//                    }
-//                }, 200);
-//            }
-
-
-
             new MyAs().execute();
-
             while ((count = is.read(bytes)) > 0) {
                 os.write(bytes, 0, count);
             }
@@ -80,7 +49,7 @@ class FileRec extends Thread implements Runnable {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    UserMessages.add_file(getNameByIp(ip),fileneme);
+                    UserMessages.add_file(getNameByIp(ip),"/WifiSocket/"+dir_by_type(fileneme)+"/"+fileneme,true);
                 }
             });
 
@@ -88,10 +57,36 @@ class FileRec extends Thread implements Runnable {
             handler.post(new Runnable() {
                 @Override
                 public void run() {
-                    UserMessages.add_file(MainActivity.context.getResources().getString(R.string.rec_error),fileneme);
+                    UserMessages.add_file(MainActivity.context.getResources().getString(R.string.rec_error),fileneme,false);
                 }
             });
         }
+    }
+
+
+    public String dir_by_type(String name){
+        String format = get_format(name);
+        format = format.toLowerCase();
+        if (format.equals("jpg")||format.equals("jpeg")||format.equals("gif")||format.equals("bmp")||format.equals("png")||format.equals("svg")){
+            return "Picture";
+        }
+        else if (format.equals("3gp")||format.equals("m4a")||format.equals("m4b")||format.equals("mp3")||format.equals("oog")){
+            return "Music";
+        }
+        else if (format.equals("flv")||format.equals("ogg")||format.equals("avi")||format.equals("wmv")||format.equals("mp4")||format.equals("3gp")||format.equals("ts")){
+            return "Video";
+        }
+        else if (format.equals("html")||format.equals("htm")||format.equals("css")||format.equals("pdf")||format.equals("docx")||format.equals("xml")||format.equals("doc")){
+            return "Document";
+        }
+        else return "Other";
+    }
+
+
+    public String get_format(String s){
+        int t = s.length()-1;
+        while (s.charAt(t)!='.'){t--;}
+        return s.substring(t+1);
     }
 
     public String getNameByIp(String ip){

@@ -1,9 +1,16 @@
 package com.example.wifi_socket;
 
+import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class UserMessages {
@@ -32,10 +39,20 @@ public class UserMessages {
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public static void add_file(String ip, String filename){
-        FileView fv = new FileView(MainActivity.context);
+    public static void add_file(String ip, String filename, boolean clickable){
+        final FileView fv = new FileView(MainActivity.context);
         fv.set_text_color(Settings.file_text_color1, Settings.file_text_color2);
         fv.setTextView(ip,filename);
+
+        if (clickable){
+            fv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    openfile(fv.filename.getText().toString());
+                }
+            });
+        }
+
         if (ip.equals(MainActivity.context.getResources().getString(R.string.send_me))){
             fv.set_Color(Settings.file_send_me,true);
         }else if (ip.equals(MainActivity.context.getResources().getString(R.string.send_error))) {
@@ -50,6 +67,21 @@ public class UserMessages {
         list.add(fv);
         MainActivity.mess_list.setAdapter(new MyGraidViewAdapter(list));
         MainActivity.mess_list.invalidate();
+    }
+
+
+    public static void openfile(String s){
+        String filepath = Environment.getExternalStorageDirectory().getPath()+s;
+        Uri uri = Uri.fromFile(new File(filepath));
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.setDataAndType(uri, "resource/folder");
+         try {
+             MainActivity.context.startActivity(intent);
+         }catch (Exception e){
+             Toast.makeText(MainActivity.context,MainActivity.context.getResources().getString(R.string.file_ex) , Toast.LENGTH_LONG).show();
+         }
+
     }
 
 }

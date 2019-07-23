@@ -32,7 +32,7 @@
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/scan"
             android:layout_width="match_parent"
-            android:layout_height="50sp"
+            android:layout_height="wrap_content"
             android:textColor="#fff"
             android:background="@drawable/btn_app"
             android:text="Scan"
@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:hint="ip گیرنده"
+                android:hint="گیرنده"
                 android:textAlignment="textEnd"
                 android:layout_marginEnd="35sp"
                 android:layout_marginRight="40sp"

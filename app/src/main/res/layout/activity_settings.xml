@@ -13,7 +13,7 @@
         android:layout_marginTop="20sp"
         android:layout_marginLeft="20sp"
         android:layout_marginRight="20sp"
-        android:layout_marginBottom="40sp"
+        android:layout_marginBottom="35sp"
         android:id="@+id/settings_list"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"

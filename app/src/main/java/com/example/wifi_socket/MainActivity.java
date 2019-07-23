@@ -276,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
     private void resize() {
         double h = (double) getDisplyHeight();
         bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setPeekHeight((int) Math.floor(0.11 * h));
+        bottomSheetBehavior.setPeekHeight((int) Math.floor(0.1 * h)+20);
 
         message.addTextChangedListener(new TextWatcher() {
 
@@ -355,7 +355,38 @@ public class MainActivity extends AppCompatActivity {
         File dir = new File(exdir, "WifiSocket");
         if (!dir.exists()) {
             dir.mkdirs();
-            Toast.makeText(context, context.getResources().getString(R.string.filecreated), Toast.LENGTH_SHORT).show();
+        }
+
+        // for creating image music and ...
+        //pictures
+        File file1 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
+        File file11 = new File(file1, "Picture");
+        if (!file11.exists()) {
+            file11.mkdirs();
+        }
+        //musics
+        File file2 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
+        File file22 = new File(file2, "Music");
+        if (!file22.exists()) {
+            file22.mkdirs();
+        }
+        //videos
+        File file3 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
+        File file33 = new File(file3, "Video");
+        if (!file33.exists()) {
+            file33.mkdirs();
+        }
+        //other
+        File file4 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
+        File file44 = new File(file4, "Other");
+        if (!file44.exists()) {
+            file44.mkdirs();
+        }
+        //document
+        File file5 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
+        File file55 = new File(file5, "Document");
+        if (!file55.exists()) {
+            file55.mkdirs();
         }
     }
 

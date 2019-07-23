@@ -53,7 +53,7 @@ public class FileSend extends AsyncTask<String,Void,Void> {
                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                 @Override
                 public void run() {
-                    UserMessages.add_file(MainActivity.context.getResources().getString(R.string.send_me),next_of_zero(path));
+                    UserMessages.add_file(MainActivity.context.getResources().getString(R.string.send_me),next_of_zero(path),false);
 
                 }
             });
@@ -62,7 +62,7 @@ public class FileSend extends AsyncTask<String,Void,Void> {
                 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
                 @Override
                 public void run() {
-                    UserMessages.add_file(MainActivity.context.getResources().getString(R.string.send_error),":(");
+                    UserMessages.add_file(MainActivity.context.getResources().getString(R.string.send_error),":(",false);
 //                    UserMessages.add_file(Main);
                 }
             });
