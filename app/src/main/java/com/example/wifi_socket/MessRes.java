@@ -39,9 +39,9 @@ class MessRes extends Thread implements Runnable{
                             String[] con = get_mess(str);
                             String ip = con[0];
                             if (!ip.equals(""))
-                                UserMessages.add_message("Ip: " + ip, con[1]);
+                                UserMessages.add_message(ip, con[1]);
                             else
-                                UserMessages.add_message("Ip: Unknown", con[1]);
+                                UserMessages.add_message("Ip : Unknown", con[1]);
                         }else {
                             commandHandler = new CommandHandler(get_command(str));
                         }
@@ -94,6 +94,6 @@ class MessRes extends Thread implements Runnable{
         int i = MainActivity.devices.indexOf(ip);
         if (i>=0){
             return MainActivity.devices.get(i+1);
-        }else return ip;
+        }else return MainActivity.context.getResources().getString(R.string.unknowndev);
     }
 }

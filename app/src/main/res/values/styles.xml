@@ -9,7 +9,7 @@
     </style>
 
     <style name="FilePickerAlertDialogTheme" parent="Theme.AppCompat.Dialog.Alert">
-        <item name="colorPrimary">#222</item>
+        <item name="colorPrimary">#009688</item>
         <item name="colorPrimaryDark">#111</item>
         <item name="colorAccent">#999</item>
     </style>
