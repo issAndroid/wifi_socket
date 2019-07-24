@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<String> devices;
     static ArrayList<String> my_sends;
     static ProgressBar progressBar;
+    static Settings themeColor;
 
 
     @Override
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         this.context = getApplicationContext();
-        Settings themeColor = new Settings();
+         themeColor= new Settings();
         init();
         send();
         res();

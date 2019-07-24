@@ -7,14 +7,10 @@
     android:id="@+id/coorlayout"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent">
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="29sp"
@@ -26,9 +22,6 @@
             android:textSize="16sp"
             android:padding="2sp"
             android:text="your ip :"/>
-
-
-
         <android.support.v7.widget.AppCompatButton
             android:id="@+id/scan"
             android:layout_width="match_parent"
@@ -38,8 +31,6 @@
             android:text="Scan"
             android:textSize="18sp"
             android:textAllCaps="false" />
-
-
         <GridView
             android:id="@+id/list_mess"
             android:layout_width="match_parent"
@@ -48,27 +39,13 @@
             android:stackFromBottom="true"
             android:transcriptMode="alwaysScroll"
             app:layout_constraintTop_toBottomOf="@+id/scan"></GridView>
-
     </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
     <FrameLayout
         android:id="@+id/bottomSheet"
         style="@style/Widget.Design.BottomSheet.Modal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/bottom_sheet_behavior">
-
         <ProgressBar
             android:id="@+id/progressBar2"
             style="?android:attr/progressBarStyleHorizontal"
@@ -78,23 +55,16 @@
             android:background="@color/colorPrimaryDark"
             android:max="100"
             android:secondaryProgress="100" />
-
         <LinearLayout
             android:padding="5sp"
             android:layout_margin="5sp"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-
-
-
-
-
             <RelativeLayout
                 android:padding="5sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                 <EditText
                     android:id="@+id/message"
                     android:layout_width="match_parent"
@@ -104,7 +74,6 @@
                     android:layout_marginRight="35sp"
                     android:hint=" پیام "
                     tools:layout_editor_absoluteX="0dp" />
-
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/send"
                     android:layout_width="33sp"
@@ -120,7 +89,6 @@
                     android:visibility="gone"
                     android:textColor="#fff"
                     app:layout_constraintTop_toBottomOf="@+id/message" />
-
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/file"
                     android:layout_width="35sp"
@@ -133,11 +101,7 @@
                     android:layout_marginRight="-37dp"
                     android:background="@drawable/btn_file"
                     app:layout_constraintTop_toBottomOf="@+id/message" />
-
             </RelativeLayout>
-
-
-
             <EditText
                 android:id="@+id/http"
                 android:padding="5sp"
@@ -150,9 +114,6 @@
                 android:layout_marginRight="40sp"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp" />
-
-
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -163,7 +124,6 @@
                         android:layout_marginEnd="35sp"
                         android:layout_marginRight="40sp"
                         android:hint="نام من" />
-
                     <android.support.v7.widget.AppCompatButton
                         android:layout_width="33sp"
                         android:id="@+id/settings"
@@ -174,12 +134,6 @@
                         android:layout_toEndOf="@+id/myname"
                         android:background="@drawable/setting_btn" />
                 </RelativeLayout>
-
         </LinearLayout>
-
     </FrameLayout>
-
-
-
-
 </android.support.design.widget.CoordinatorLayout>

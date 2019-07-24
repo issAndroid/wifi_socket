@@ -8,27 +8,15 @@
     android:background="@color/colorPrimaryDark"
     tools:context=".SettingsActivity">
 
-    <ListView
+
+    <GridView
         android:padding="5sp"
-        android:layout_marginTop="20sp"
-        android:layout_marginLeft="20sp"
-        android:layout_marginRight="20sp"
-        android:layout_marginBottom="35sp"
+        android:layout_margin="20sp"
         android:id="@+id/settings_list"
         android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    </GridView>
 
-    </ListView>
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/exit"
-        android:layout_width="match_parent"
-        android:layout_height="35sp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/btn_save_exit"
-        android:text="ذخیره و خروج"
-        android:textColor="#fff"
-        android:textSize="18sp" />
 
 </RelativeLayout>

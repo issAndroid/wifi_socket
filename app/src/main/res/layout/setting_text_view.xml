@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#181818"
+    android:orientation="vertical"
+    android:paddingRight="15sp"
+    android:paddingTop="15sp"
+    android:paddingLeft="15sp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="نام من :"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:gravity="right"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10sp"
+        android:layout_marginLeft="10sp"
+        android:id="@+id/my_name"
+        android:textColor="#eee"
+        android:hint="my name" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="پورت ارسال پیام :"
+        android:paddingTop="5sp"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:gravity="right"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10sp"
+        android:layout_marginLeft="10sp"
+
+        android:id="@+id/message_port"
+        android:textColor="#eee"
+        android:inputType="number"
+        android:hint="message port"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="پورت ارسال فایل :"
+        android:paddingTop="5sp"
+        android:textSize="15sp"
+        android:textColor="#fff"
+        android:gravity="right"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10sp"
+        android:layout_marginLeft="10sp"
+        android:id="@+id/file_port"
+        android:textColor="#eee"
+        android:hint="file port"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_save_exit"
+        android:id="@+id/btn_default"
+        android:textColor="#fff"
+        android:layout_marginTop="10sp"
+        android:text="بازگشت به تم پیشفرض"/>
+
+</LinearLayout>
