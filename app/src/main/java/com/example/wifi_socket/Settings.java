@@ -3,10 +3,8 @@ package com.example.wifi_socket;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.widget.Toast;
 
 public class Settings {
-
     public static int send_me;
     public static int send_accepted;
     public static int send_error;
@@ -27,7 +25,6 @@ public class Settings {
     public static String file_port;
     static SharedPreferences preferences;
     static SharedPreferences.Editor editor;
-
 
     public Settings() {
         preferences = MainActivity.context.getSharedPreferences("Settings", Context.MODE_PRIVATE);
@@ -55,101 +52,80 @@ public class Settings {
         file_port = preferences.getString("file_port", "4000");
         my_name = preferences.getString("my_name", "Test");
     }
-
-
     public static void setBottomsheetcolor(int bottomsheetcolor) {
         editor.putInt("bottomsheetcolor", bottomsheetcolor);
         editor.apply();
     }
-
-
     public static void setSend_me(int send_me) {
         editor.putInt("send_me", send_me);
         editor.apply();
     }
-
     public static void setError_color(int error_color) {
         editor.putInt("error_color", error_color);
         editor.apply();
     }
-
     public static void setSend_accepted(int send_accepted) {
         editor.putInt("send_accepted", send_accepted);
         editor.apply();
     }
-
     public static void setSend_error(int send_error) {
         editor.putInt("send_error", send_error);
         editor.apply();
     }
-
     public static void setFile_text_color1(int file_text_color1) {
         editor.putInt("file_text_color1", file_text_color1);
         editor.apply();
     }
-
     public static void setFile_text_color2(int file_text_color2) {
         editor.putInt("file_text_color2", file_text_color2);
         editor.apply();
     }
-
     public static void setFile_send_me(int file_send_me) {
         editor.putInt("file_send_me", file_send_me);
         editor.apply();
 
     }
-
     public static void setFile_send_accepted(int file_send_accepted) {
         editor.putInt("file_send_accepted", file_send_accepted);
         editor.apply();
 
     }
-
     public static void setFile_send_error(int file_send_error) {
         editor.putInt("file_send_error", file_send_error);
         editor.apply();
     }
-
     public static void setScanpage_background_color(int scanpage_background_color) {
         editor.putInt("scanpage_background_color", scanpage_background_color);
         editor.apply();
     }
-
     public static void setMess_port(String mess_port) {
         editor.putString("mess_port", mess_port);
         editor.apply();
     }
-
     public static void setFile_port(String file_port) {
         editor.putString("file_port", file_port);
         editor.apply();
     }
-
     public static void setColorAccent(int colorAccent) {
         editor.putInt("colorAccent", colorAccent);
         editor.apply();
     }
-
     public static void setBackground_color(int background_color) {
         editor.putInt("background_color", background_color);
         editor.apply();
     }
-
     public static void setMy_name(String my_name) {
         editor.putString("my_name", my_name);
         editor.apply();
     }
-
     public static void setText_color1(int text_color1) {
         editor.putInt("text_color1", text_color1);
         editor.apply();
     }
-
     public static void setText_color2(int text_color2) {
         editor.putInt("text_color2", text_color2);
         editor.apply();
     }
-
     public static int getColor(String s) {
         if (s.equals("send_me"))
             return send_me;
@@ -183,7 +159,6 @@ public class Settings {
             return scanpage_background_color;
         else return 0;
     }
-
     public static void setColor(String s, int color){
          if (s.equals("send_me"))
             setSend_me(color);
@@ -216,5 +191,4 @@ public class Settings {
         else if (s.equals("scanpage_background_color"))
             setScanpage_background_color(color);
     }
-
 }

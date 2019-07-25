@@ -13,17 +13,14 @@ public class SettingStringView extends LinearLayout {
     LinearLayout rootview;
     EditText myname,messageport,fileport;
     Button btn_default;
-
     public SettingStringView(Context context) {
         super(context);
         init(context);
     }
-
     public SettingStringView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
     }
-
     private void init(Context context) {
         rootview= (LinearLayout) inflate(context,R.layout.setting_text_view,this);
         myname= (EditText) rootview.findViewById(R.id.my_name);
@@ -38,7 +35,6 @@ public class SettingStringView extends LinearLayout {
         getlast();
         default_color();
     }
-
     private void getlast() {
         this.myname.setText(Settings.my_name);
         this.messageport.setText(Settings.mess_port);

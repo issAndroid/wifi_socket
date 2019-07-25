@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
     public SharedPreferences preferences;
     public SharedPreferences.Editor editor;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         startService(new Intent(getBaseContext(), NetworkRes.class));
         settings_page();
     }
-
     private void settings_page() {
         this.settings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,7 +87,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     @SuppressLint("ResourceAsColor")
     private void connection_state() {
 
@@ -141,7 +138,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
     private void scanpage() {
         scan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,12 +147,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void res() {
         Thread thread = new Thread(new MessRes());
         thread.start();
     }
-
     private void send() {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,7 +167,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void init() {
         isStoragePermissionGranted();
         send = (Button) findViewById(R.id.send);
@@ -210,7 +203,6 @@ public class MainActivity extends AppCompatActivity {
         mkdir();
         pick_file_to_send();
     }
-
     private void first_use() {
         preferences=getSharedPreferences("app",Context.MODE_PRIVATE);
         String s = preferences.getString("first","");
@@ -224,8 +216,6 @@ public class MainActivity extends AppCompatActivity {
             editor.apply();
         }
     }
-
-
     private void showTextDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("اولین ورود");
@@ -250,8 +240,6 @@ public class MainActivity extends AppCompatActivity {
 
         builder.show();
     }
-
-
     private void pick_file_to_send() {
         //for picking file , adding to send list and call send method
         file.setOnClickListener(new View.OnClickListener() {
@@ -290,7 +278,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 //            Toast.makeText(context,context.getResources().getString(R.string.m), Toast.LENGTH_SHORT).show();
@@ -306,7 +293,6 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
     }
-
     private void myname_listener() {
         myname.addTextChangedListener(new TextWatcher() {
             @Override
@@ -323,7 +309,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
     private void resize() {
         double h = (double) getDisplyHeight();
         bottomSheetBehavior.setHideable(false);
@@ -353,7 +338,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-
     public static String getLocalIpAddress() {
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en
@@ -374,16 +358,13 @@ public class MainActivity extends AppCompatActivity {
         }
         return null;
     }
-
     public static String get_ip() {
         return http.getText().toString();
     }
-
     public static String get_mess() {
         return message.getText().toString();
 
     }
-
     public int getDisplyHeight() {
         final WindowManager windowManager = getWindowManager();
         final Point size = new Point();
@@ -399,7 +380,6 @@ public class MainActivity extends AppCompatActivity {
         screenhight = size.y;
         return screenhight - contop - actionbar - statusbar;
     }
-
     private void mkdir() {
         // for creating app's directory
         File exdir = Environment.getExternalStorageDirectory();
@@ -440,7 +420,6 @@ public class MainActivity extends AppCompatActivity {
             file55.mkdirs();
         }
     }
-
     public static void send_file() {
         String path = my_sends.get(0);
         File help = new File(path);
@@ -458,7 +437,6 @@ public class MainActivity extends AppCompatActivity {
         fileSend.execute(path, get_ip());
         my_sends.remove(0);
     }
-
     public static String after_last_slash(String s) {
         int t = s.length() - 1;
         while (s.charAt(t) != '/' && t > 0) {
@@ -466,5 +444,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return s.substring(t + 1);
     }
-
 }
