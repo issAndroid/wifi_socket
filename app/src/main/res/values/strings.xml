@@ -18,4 +18,11 @@
     <string name="not_received">دریافت نشد</string>
     <string name="command_not_fount">دستور نامعتبر</string>
     <string name="file_ex">اوه... مثل اینکه فایل وجود نداره باید از فایل منیجر استفاده کنید</string>
+    <string name="first">
+        مثل اینکه اولین باره از این اپ استفاده میکنید!
+        \n
+        لطفا یک اسم انتخاب کنید
+        \n
+        بقیه با اسم شما رو با این اسم می بینن!
+    </string>
 </resources>

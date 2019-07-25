@@ -3,7 +3,9 @@ package com.example.wifi_socket;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.net.ConnectivityManager;
@@ -14,9 +16,11 @@ import android.os.Environment;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
@@ -26,12 +30,10 @@ import android.widget.GridView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.developer.filepicker.controller.DialogSelectionListener;
 import com.developer.filepicker.model.DialogConfigs;
 import com.developer.filepicker.model.DialogProperties;
 import com.developer.filepicker.view.FilePickerDialog;
-
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.net.InetAddress;
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
     static ArrayList<String> my_sends;
     static ProgressBar progressBar;
     static Settings themeColor;
+    public SharedPreferences preferences;
+    public SharedPreferences.Editor editor;
 
 
     @Override
@@ -173,6 +177,11 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         isStoragePermissionGranted();
         send = (Button) findViewById(R.id.send);
+        
+        
+        // first login
+        first_use();
+        
         settings = (Button) findViewById(R.id.settings);
         scan = (Button) findViewById(R.id.scan);
         scan.setText(getResources().getString(R.string.scan));
@@ -201,6 +210,47 @@ public class MainActivity extends AppCompatActivity {
         mkdir();
         pick_file_to_send();
     }
+
+    private void first_use() {
+        preferences=getSharedPreferences("app",Context.MODE_PRIVATE);
+        String s = preferences.getString("first","");
+        if (s.equals("")){
+            // to do... first login
+            showTextDialog();
+
+            // saving login
+            editor=preferences.edit();
+            editor.putString("first","no");
+            editor.apply();
+        }
+    }
+
+
+    private void showTextDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("اولین ورود");
+
+        builder.setMessage(context.getResources().getString(R.string.first));
+
+// Set up the input
+        final EditText input = new EditText(this);
+// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
+        builder.setView(input);
+
+// Set up the buttons
+        builder.setPositiveButton("تایید", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name  = input.getText().toString();
+                Settings.setMy_name(name);
+                myname.setText(name);
+            }
+        });
+
+        builder.show();
+    }
+
 
     private void pick_file_to_send() {
         //for picking file , adding to send list and call send method
