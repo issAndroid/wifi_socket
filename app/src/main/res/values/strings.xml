@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">wifi_socket</string>
+    <string name="app_name">Wifi Socket</string>
     <string name="send_me">[خودم]</string>
     <string name="send_error">[ارسال نشد]</string>
     <string name="rec_error">[دریافت نشد]</string>
@@ -23,6 +23,6 @@
         \n
         لطفا یک اسم انتخاب کنید
         \n
-        بقیه با اسم شما رو با این اسم می بینن!
+        بقیه با این اسم شما رو می بینن!
     </string>
 </resources>
