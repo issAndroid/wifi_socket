@@ -76,11 +76,11 @@ public class UserMessages {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.setDataAndType(uri, "resource/folder");
-         try {
-             MainActivity.context.startActivity(intent);
-         }catch (Exception e){
-             Toast.makeText(MainActivity.context,MainActivity.context.getResources().getString(R.string.file_ex) , Toast.LENGTH_LONG).show();
-         }
+        try {
+            MainActivity.context.startActivity(intent);
+        }catch (Exception e){
+            Toast.makeText(MainActivity.context,MainActivity.context.getResources().getString(R.string.file_ex) , Toast.LENGTH_LONG).show();
+        }
 
     }
 

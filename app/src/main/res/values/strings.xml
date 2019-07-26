@@ -17,7 +17,11 @@
     <string name="select_a_file">انتخاب فایل برای ارسال</string>
     <string name="not_received">دریافت نشد</string>
     <string name="command_not_fount">دستور نامعتبر</string>
-    <string name="file_ex">اوه... مثل اینکه فایل وجود نداره باید از فایل منیجر استفاده کنید</string>
+    <string name="file_ex">
+        اوه... مثل اینکه امکان باز کردن فایل از اینجا وجود نداره!
+        \n
+        باید از فایل منیجر استفاده کنید
+    </string>
     <string name="first">
         مثل اینکه اولین باره از این اپ استفاده میکنید!
         \n
