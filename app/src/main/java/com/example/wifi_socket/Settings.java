@@ -3,8 +3,6 @@ package com.example.wifi_socket;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 public class Settings {
     public static int send_me;

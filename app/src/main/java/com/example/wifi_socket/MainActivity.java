@@ -2,36 +2,28 @@ package com.example.wifi_socket;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.PorterDuff;
-import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.HandlerThread;
-import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -190,7 +182,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 ib.setColorFilter(Settings.btn_edittext_color1);
             }
-        },100);
+        },50);
     }
 
 
@@ -253,7 +245,6 @@ public class MainActivity extends AppCompatActivity {
         if (s.equals("")){
             // to do... first login
             showTextDialog();
-
             // saving login
             editor=preferences.edit();
             editor.putString("first","no");
@@ -286,7 +277,6 @@ public class MainActivity extends AppCompatActivity {
     }
     private void pick_file_to_send() {
         //for picking file , adding to send list and call send method
-
         file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -319,7 +309,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                     dialog.show();
-
                 }
             }
         });

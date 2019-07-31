@@ -52,7 +52,6 @@
             android:progressDrawable="@drawable/progressbarcustom"
             android:layout_width="match_parent"
             android:layout_height="10sp"
-            android:background="@color/colorPrimaryDark"
             android:max="100"
             android:secondaryProgress="100" />
         <LinearLayout
