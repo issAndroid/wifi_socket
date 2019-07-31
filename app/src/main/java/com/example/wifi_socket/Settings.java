@@ -62,7 +62,7 @@ public class Settings {
         btn_edittext_color1 = preferences.getInt("btn_edittext_color1",Color.rgb(10,10,10));
         btn_edittext_color2 = preferences.getInt("btn_edittext_color2",Color.rgb(190,190,190));
         //edittext color
-        edittext_textcolor = preferences.getInt("exttext_textcolor",Color.rgb(5,5,5));
+        edittext_textcolor = preferences.getInt("edittext_textcolor",Color.rgb(5,5,5));
         edittext_linecolor = preferences.getInt("edittext_linecolor",Color.rgb(25,166,110));
         edittext_hintcolor = preferences.getInt("edittext_hintcolor",Color.rgb(100,100,100));
     }

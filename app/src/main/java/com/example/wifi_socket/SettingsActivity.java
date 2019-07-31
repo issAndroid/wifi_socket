@@ -65,6 +65,12 @@ public class SettingsActivity extends AppCompatActivity {
         list_of_colors.add("bottomsheetcolor");
         list_of_colors.add("background_color");
         list_of_colors.add("scanpage_background_color");
+
+        list_of_colors.add("btn_edittext_color1");
+        list_of_colors.add("btn_edittext_color2");
+        list_of_colors.add("edittext_textcolor");
+        list_of_colors.add("edittext_linecolor");
+        list_of_colors.add("edittext_hintcolor");
     }
 
     public String get_persian_name(String s){
@@ -98,6 +104,16 @@ public class SettingsActivity extends AppCompatActivity {
             return "پس زمینه چت";
         else if (s.equals("scanpage_background_color"))
             return "پس زمینه صفحه اسکن";
+        else if (s.equals("btn_edittext_color1"))
+            return "دکمه ها (کلیک نشده)";
+         else if (s.equals("btn_edittext_color2"))
+            return "دکمه ها (کلیک شده)";
+         else if (s.equals("edittext_textcolor"))
+            return "متن ورودی ها";
+         else if (s.equals("edittext_linecolor"))
+            return "رنگ لاین ورودی ها";
+         else if (s.equals("edittext_hintcolor"))
+            return "رنگ راهنمای ورودی ها";
         else return "";
     }
 
