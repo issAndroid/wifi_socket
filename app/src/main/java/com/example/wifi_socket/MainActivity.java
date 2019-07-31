@@ -187,13 +187,11 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init() {
+        // is necessary Permissions got
         isStoragePermissionGranted();
-        send = (ImageButton) findViewById(R.id.send);
-        
-        
         // first login
         first_use();
-        
+        send = (ImageButton) findViewById(R.id.send);
         settings = (ImageButton) findViewById(R.id.settings);
         scan = (Button) findViewById(R.id.scan);
         scan.setText(getResources().getString(R.string.scan));
@@ -207,30 +205,43 @@ public class MainActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar2);
         devices = new ArrayList<>();
         userMessages = new UserMessages();
-        View bottomsheet = findViewById(R.id.bottomSheet);
-        bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
-        bottomsheet.setBackgroundColor(Settings.bottomsheetcolor);
-        layout.setBackgroundColor(Settings.background_color);
-        mess_list.setBackgroundColor(Settings.background_color);
         my_sends = new ArrayList<>();
+        // setting ip
+        set_ip();
+        // color and size
+        color_setter();
+        resize();
+        // listener for my_name edit text ( if line count > 1 => extended )
+        myname_listener();
+        // necessary folders for app
+        mkdir();
+        // for file picker
+        pick_file_to_send();
+    }
+
+    private void set_ip() {
         if (getLocalIpAddress() != null)
             your_ip.setText(getLocalIpAddress());
         else your_ip.setText(context.getResources().getString(R.string.not_connected));
-        resize();
         myname.setText(Settings.my_name);
-        myname_listener();
-        mkdir();
-        pick_file_to_send();
-        set_imagebutton_color();
     }
 
-    private void set_imagebutton_color() {
-        this.send.setColorFilter(Settings.btn_edittext_color1);
-        this.file.setColorFilter(Settings.btn_edittext_color1);
-        this.settings.setColorFilter(Settings.btn_edittext_color1);
+    private void color_setter() {
+        // bottom sheet color
+        View bottomsheet = findViewById(R.id.bottomSheet);
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomsheet);
+        bottomsheet.setBackgroundColor(Settings.bottomsheetcolor);
+        // for app back ground
+        layout.setBackgroundColor(Settings.background_color);
+        mess_list.setBackgroundColor(Settings.background_color);
+        // for edit texts in bottom sheet
         editttext_colors(message);
         editttext_colors(http);
         editttext_colors(myname);
+        // for buttons ( file - send - settings )
+        this.send.setColorFilter(Settings.btn_edittext_color1);
+        this.file.setColorFilter(Settings.btn_edittext_color1);
+        this.settings.setColorFilter(Settings.btn_edittext_color1);
     }
 
     public void editttext_colors(EditText e){
@@ -254,16 +265,13 @@ public class MainActivity extends AppCompatActivity {
     private void showTextDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("اولین ورود");
-
         builder.setMessage(context.getResources().getString(R.string.first));
-
-// Set up the input
+        // Set up the input
         final EditText input = new EditText(this);
-// Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
+        // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
         input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL);
         builder.setView(input);
-
-// Set up the buttons
+        // Set up the buttons
         builder.setPositiveButton("تایید", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -272,7 +280,6 @@ public class MainActivity extends AppCompatActivity {
                 myname.setText(name);
             }
         });
-
         builder.show();
     }
     private void pick_file_to_send() {
@@ -287,14 +294,11 @@ public class MainActivity extends AppCompatActivity {
                 } else if (ip.equals(your_ip.getText().toString())) {
                     Toast.makeText(MainActivity.this, context.getResources().getString(R.string.yourself), Toast.LENGTH_SHORT).show();
                 } else {
-
-
                     DialogProperties properties = new DialogProperties();
                     properties.selection_mode = DialogConfigs.MULTI_MODE;
                     properties.root = new File(Environment.getExternalStorageDirectory().getPath());
                     FilePickerDialog dialog = new FilePickerDialog(MainActivity.this, properties);
                     dialog.setTitle(context.getResources().getString(R.string.select_a_file));
-
                     dialog.setDialogSelectionListener(new DialogSelectionListener() {
                         @Override
                         public void onSelectedFilePaths(String[] files) {
@@ -315,16 +319,15 @@ public class MainActivity extends AppCompatActivity {
     }
     public boolean isStoragePermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//            Toast.makeText(context,context.getResources().getString(R.string.m), Toast.LENGTH_SHORT).show();
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     == PackageManager.PERMISSION_GRANTED) {
-//                Toast.makeText(context, "ok!!", Toast.LENGTH_SHORT).show();
                 return true;
             } else {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                 return false;
             }
-        } else { //permission is automatically granted on sdk<23 upon installation
+        } else {
+            //permission is automatically granted on sdk<23 upon installation
             return true;
         }
     }
@@ -333,11 +336,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
-
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
-
             @Override
             public void afterTextChanged(Editable s) {
                 Settings.setMy_name(myname.getText().toString());
@@ -348,19 +349,14 @@ public class MainActivity extends AppCompatActivity {
         double h = (double) getDisplyHeight();
         bottomSheetBehavior.setHideable(false);
         bottomSheetBehavior.setPeekHeight((int) Math.floor(0.1 * h)+20);
-
         message.addTextChangedListener(new TextWatcher() {
-
             public void afterTextChanged(Editable s) {
             }
-
             public void beforeTextChanged(CharSequence cs, int s, int c, int a) {
             }
-
             public void onTextChanged(CharSequence cs, int s, int b, int c) {
                 if (message.getLineCount() > 1)
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
-
                 if (message.getText().toString().equals("")) {
                     file.setVisibility(View.VISIBLE);
                     send.setVisibility(View.GONE);
@@ -368,11 +364,10 @@ public class MainActivity extends AppCompatActivity {
                     send.setVisibility(View.VISIBLE);
                     file.setVisibility(View.GONE);
                 }
-
             }
         });
-
     }
+
     public static String getLocalIpAddress() {
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en
@@ -398,7 +393,6 @@ public class MainActivity extends AppCompatActivity {
     }
     public static String get_mess() {
         return message.getText().toString();
-
     }
     public int getDisplyHeight() {
         final WindowManager windowManager = getWindowManager();
@@ -422,39 +416,27 @@ public class MainActivity extends AppCompatActivity {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-
-        // for creating image music and ...
         //pictures
-        File file1 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
-        File file11 = new File(file1, "Picture");
-        if (!file11.exists()) {
-            file11.mkdirs();
-        }
+        make_dir("Picture");
         //musics
-        File file2 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
-        File file22 = new File(file2, "Music");
-        if (!file22.exists()) {
-            file22.mkdirs();
-        }
+        make_dir("Music");
         //videos
-        File file3 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
-        File file33 = new File(file3, "Video");
-        if (!file33.exists()) {
-            file33.mkdirs();
-        }
+        make_dir("Video");
         //other
-        File file4 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
-        File file44 = new File(file4, "Other");
-        if (!file44.exists()) {
-            file44.mkdirs();
-        }
+        make_dir("Other");
         //document
-        File file5 = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
-        File file55 = new File(file5, "Document");
-        if (!file55.exists()) {
-            file55.mkdirs();
+        make_dir("Document");
+    }
+
+    private void make_dir(String name) {
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/WifiSocket");
+        File file0 = new File(file, name);
+        if (!file0.exists()) {
+            file0.mkdirs();
         }
     }
+
+
     public static void send_file() {
         String path = my_sends.get(0);
         File help = new File(path);
