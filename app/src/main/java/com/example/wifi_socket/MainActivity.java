@@ -152,6 +152,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void res() {
+        // starting message receiver
         Thread thread = new Thread(new MessRes());
         thread.start();
     }
@@ -175,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void color12 (final ImageButton ib){
+        // toggle between two colors by pressed state
         ib.setColorFilter(Settings.btn_edittext_color2);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -187,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init() {
-        // is necessary Permissions got
+        // checking necessary Permissions if grant
         isStoragePermissionGranted();
         // first login
         first_use();
@@ -334,26 +336,28 @@ public class MainActivity extends AppCompatActivity {
     private void myname_listener() {
         myname.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
             @Override
             public void afterTextChanged(Editable s) {
                 Settings.setMy_name(myname.getText().toString());
             }
         });
     }
+
     private void resize() {
         double h = (double) getDisplyHeight();
         bottomSheetBehavior.setHideable(false);
-        bottomSheetBehavior.setPeekHeight((int) Math.floor(0.1 * h)+20);
+        bottomSheetBehavior.setPeekHeight((int) (0.1 * h)+20);
+        // to listen message edit text's text if line count > 1 => extend
+        message_text_listener();
+    }
+
+    private void message_text_listener() {
         message.addTextChangedListener(new TextWatcher() {
-            public void afterTextChanged(Editable s) {
-            }
-            public void beforeTextChanged(CharSequence cs, int s, int c, int a) {
-            }
+            public void afterTextChanged(Editable s) {}
+            public void beforeTextChanged(CharSequence cs, int s, int c, int a) {}
             public void onTextChanged(CharSequence cs, int s, int b, int c) {
                 if (message.getLineCount() > 1)
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HALF_EXPANDED);
@@ -384,8 +388,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-        } catch (SocketException ex) {
-        }
+        } catch (SocketException ex) {}
         return null;
     }
     public static String get_ip() {
@@ -435,7 +438,6 @@ public class MainActivity extends AppCompatActivity {
             file0.mkdirs();
         }
     }
-
 
     public static void send_file() {
         String path = my_sends.get(0);
