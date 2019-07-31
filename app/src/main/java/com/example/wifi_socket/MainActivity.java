@@ -8,7 +8,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.PorterDuff;
 import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -18,6 +20,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
@@ -181,7 +184,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void color12 (final ImageButton ib){
         ib.setColorFilter(Settings.btn_edittext_color2);
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -204,7 +206,6 @@ public class MainActivity extends AppCompatActivity {
         scan = (Button) findViewById(R.id.scan);
         scan.setText(getResources().getString(R.string.scan));
         file = (ImageButton) findViewById(R.id.file);
-        set_imagebutton_color();
         http = (EditText) findViewById(R.id.http);
         myname = (EditText) findViewById(R.id.myname);
         message = (EditText) findViewById(R.id.message);
@@ -228,12 +229,22 @@ public class MainActivity extends AppCompatActivity {
         myname_listener();
         mkdir();
         pick_file_to_send();
+        set_imagebutton_color();
     }
 
     private void set_imagebutton_color() {
         this.send.setColorFilter(Settings.btn_edittext_color1);
         this.file.setColorFilter(Settings.btn_edittext_color1);
         this.settings.setColorFilter(Settings.btn_edittext_color1);
+        editttext_colors(message);
+        editttext_colors(http);
+        editttext_colors(myname);
+    }
+
+    public void editttext_colors(EditText e){
+            e.getBackground().setColorFilter(Settings.edittext_linecolor, PorterDuff.Mode.SRC_ATOP);
+            e.setTextColor(Settings.edittext_textcolor);
+            e.setHintTextColor(Settings.edittext_hintcolor);
     }
 
     private void first_use() {

@@ -3,6 +3,8 @@ package com.example.wifi_socket;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 public class Settings {
     public static int send_me;
@@ -12,6 +14,9 @@ public class Settings {
     public static int text_color2;
     public static int file_text_color1;
     public static int file_text_color2;
+    public static int edittext_textcolor;
+    public static int edittext_linecolor;
+    public static int edittext_hintcolor;
     public static int file_send_me;
     public static int file_send_accepted;
     public static int file_send_error;
@@ -56,6 +61,10 @@ public class Settings {
         //color for btn send, settings, edittexts
         btn_edittext_color1 = preferences.getInt("btn_edittext_color1",Color.rgb(10,10,10));
         btn_edittext_color2 = preferences.getInt("btn_edittext_color2",Color.rgb(190,190,190));
+        //edittext color
+        edittext_textcolor = preferences.getInt("exttext_textcolor",Color.rgb(5,5,5));
+        edittext_linecolor = preferences.getInt("edittext_linecolor",Color.rgb(25,166,110));
+        edittext_hintcolor = preferences.getInt("edittext_hintcolor",Color.rgb(100,100,100));
     }
     public static void setBottomsheetcolor(int bottomsheetcolor) {
         editor.putInt("bottomsheetcolor", bottomsheetcolor);
@@ -139,6 +148,20 @@ public class Settings {
         editor.putInt("btn_edittext_color2", btn_edittext_color2);
         editor.apply();
     }
+    public static void setEdittext_textcolor(int edittext_textcolor) {
+        editor.putInt("edittext_textcolor", edittext_textcolor );
+        editor.apply();
+    }
+    public static void setEdittext_linecolor(int edittext_linecolor) {
+        editor.putInt("edittext_linecolor", edittext_linecolor);
+        editor.apply();
+    }
+
+    public static void setEdittext_hintcolor(int edittext_hintcolor) {
+        editor.putInt("edittext_hintcolor", edittext_hintcolor);
+        editor.apply();
+    }
+
     public static int getColor(String s) {
         if (s.equals("send_me"))
             return send_me;
@@ -174,6 +197,12 @@ public class Settings {
             return btn_edittext_color1;
         else if (s.equals("btn_edittext_color2"))
             return btn_edittext_color2;
+        else if (s.equals("edittext_textcolor"))
+            return edittext_textcolor;
+        else if (s.equals("edittext_linecolor"))
+            return edittext_linecolor;
+        else if (s.equals("edittext_hintcolor"))
+            return edittext_hintcolor;
         else return 0;
     }
     public static void setColor(String s, int color){
@@ -211,5 +240,11 @@ public class Settings {
              setBtn_edittext_color1(color);
          else if (s.equals("btn_edittext_color2"))
              setBtn_edittext_color2(color);
+         else if (s.equals("edittext_textcolor"))
+             setEdittext_textcolor(color);
+         else if (s.equals("edittext_linecolor"))
+             setEdittext_linecolor(color);
+         else if (s.equals("edittext_hintcolor"))
+             setEdittext_hintcolor(color);
     }
 }
