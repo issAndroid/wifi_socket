@@ -9,12 +9,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.media.Image;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
@@ -25,11 +28,13 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static boolean wifi_state = false, hotspot_state = false, sending_state = false;
     static EditText http, message, myname;
-    Button send;
-    Button scan, settings;
-    static Button file;
+    Button scan;
+    ImageButton send, settings;
+    static ImageButton file;
     static Context context;
     static GridView mess_list;
     static UserMessages userMessages;
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         this.settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                color12(settings);
                 startActivity(new Intent(MainActivity.this,SettingsActivity.class));
             }
         });
@@ -158,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                color12(send);
                 String ip = http.getText().toString();
                 if (ip.equals("")) {
                     Toast.makeText(MainActivity.this, context.getResources().getString(R.string.receiver_not_found), Toast.LENGTH_SHORT).show();
@@ -170,18 +177,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    public void color12 (final ImageButton ib){
+        ib.setColorFilter(Settings.btn_edittext_color2);
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ib.setColorFilter(Settings.btn_edittext_color1);
+            }
+        },100);
+    }
+
+
     private void init() {
         isStoragePermissionGranted();
-        send = (Button) findViewById(R.id.send);
+        send = (ImageButton) findViewById(R.id.send);
         
         
         // first login
         first_use();
         
-        settings = (Button) findViewById(R.id.settings);
+        settings = (ImageButton) findViewById(R.id.settings);
         scan = (Button) findViewById(R.id.scan);
         scan.setText(getResources().getString(R.string.scan));
-        file = (Button) findViewById(R.id.file);
+        file = (ImageButton) findViewById(R.id.file);
+        set_imagebutton_color();
         http = (EditText) findViewById(R.id.http);
         myname = (EditText) findViewById(R.id.myname);
         message = (EditText) findViewById(R.id.message);
@@ -206,6 +229,13 @@ public class MainActivity extends AppCompatActivity {
         mkdir();
         pick_file_to_send();
     }
+
+    private void set_imagebutton_color() {
+        this.send.setColorFilter(Settings.btn_edittext_color1);
+        this.file.setColorFilter(Settings.btn_edittext_color1);
+        this.settings.setColorFilter(Settings.btn_edittext_color1);
+    }
+
     private void first_use() {
         preferences=getSharedPreferences("app",Context.MODE_PRIVATE);
         String s = preferences.getString("first","");
@@ -245,9 +275,11 @@ public class MainActivity extends AppCompatActivity {
     }
     private void pick_file_to_send() {
         //for picking file , adding to send list and call send method
+
         file.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                color12(file);
                 String ip = http.getText().toString();
                 if (ip.equals("")) {
                     Toast.makeText(MainActivity.this, context.getResources().getString(R.string.receiver_not_found), Toast.LENGTH_SHORT).show();

@@ -74,7 +74,7 @@
                     android:layout_marginRight="35sp"
                     android:hint=" پیام "
                     tools:layout_editor_absoluteX="0dp" />
-                <android.support.v7.widget.AppCompatButton
+                <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/send"
                     android:layout_width="33sp"
                     android:layout_height="33sp"
@@ -84,12 +84,14 @@
                     android:layout_marginTop="2dp"
                     android:layout_marginEnd="-37dp"
                     android:layout_marginRight="-37dp"
-                    android:background="@drawable/btn_send"
+                    android:src="@drawable/ic_send_white_24dp"
+                    android:background="#0fff"
                     android:textAllCaps="false"
                     android:visibility="gone"
                     android:textColor="#fff"
+                    android:scaleType="fitCenter"
                     app:layout_constraintTop_toBottomOf="@+id/message" />
-                <android.support.v7.widget.AppCompatButton
+                <android.support.v7.widget.AppCompatImageButton
                     android:id="@+id/file"
                     android:layout_width="35sp"
                     android:layout_height="35sp"
@@ -99,7 +101,9 @@
                     android:layout_marginTop="3dp"
                     android:layout_marginEnd="-39dp"
                     android:layout_marginRight="-39dp"
-                    android:background="@drawable/btn_file"
+                    android:background="#0fff"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_attach_file_white_24dp"
                     app:layout_constraintTop_toBottomOf="@+id/message" />
             </RelativeLayout>
             <EditText
@@ -124,7 +128,7 @@
                         android:layout_marginEnd="35sp"
                         android:layout_marginRight="40sp"
                         android:hint="نام من" />
-                    <android.support.v7.widget.AppCompatButton
+                    <android.support.v7.widget.AppCompatImageButton
                         android:layout_width="33sp"
                         android:id="@+id/settings"
                         android:layout_height="33sp"
@@ -132,7 +136,9 @@
                         android:layout_marginStart="-37dp"
                         android:layout_marginTop="5dp"
                         android:layout_toEndOf="@+id/myname"
-                        android:background="@drawable/setting_btn" />
+                        android:background="#0fff"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_settings_white_24dp" />
                 </RelativeLayout>
         </LinearLayout>
     </FrameLayout>

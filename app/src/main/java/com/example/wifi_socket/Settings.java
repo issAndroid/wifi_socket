@@ -16,6 +16,8 @@ public class Settings {
     public static int file_send_accepted;
     public static int file_send_error;
     public static int colorAccent;
+    public static int btn_edittext_color1;
+    public static int btn_edittext_color2;
     public static int error_color;
     public static int bottomsheetcolor;
     public static int background_color;
@@ -51,6 +53,9 @@ public class Settings {
         mess_port = preferences.getString("mess_port", "5000");
         file_port = preferences.getString("file_port", "4000");
         my_name = preferences.getString("my_name", "Test");
+        //color for btn send, settings, edittexts
+        btn_edittext_color1 = preferences.getInt("btn_edittext_color1",Color.rgb(10,10,10));
+        btn_edittext_color2 = preferences.getInt("btn_edittext_color2",Color.rgb(190,190,190));
     }
     public static void setBottomsheetcolor(int bottomsheetcolor) {
         editor.putInt("bottomsheetcolor", bottomsheetcolor);
@@ -126,6 +131,14 @@ public class Settings {
         editor.putInt("text_color2", text_color2);
         editor.apply();
     }
+    public static void setBtn_edittext_color1(int btn_edittext_color1) {
+        editor.putInt("btn_edittext_color1", btn_edittext_color1);
+        editor.apply();
+    }
+    public static void setBtn_edittext_color2(int btn_edittext_color2) {
+        editor.putInt("btn_edittext_color2", btn_edittext_color2);
+        editor.apply();
+    }
     public static int getColor(String s) {
         if (s.equals("send_me"))
             return send_me;
@@ -157,6 +170,10 @@ public class Settings {
             return background_color;
         else if (s.equals("scanpage_background_color"))
             return scanpage_background_color;
+        else if (s.equals("btn_edittext_color1"))
+            return btn_edittext_color1;
+        else if (s.equals("btn_edittext_color2"))
+            return btn_edittext_color2;
         else return 0;
     }
     public static void setColor(String s, int color){
@@ -190,5 +207,9 @@ public class Settings {
             setBackground_color(color);
         else if (s.equals("scanpage_background_color"))
             setScanpage_background_color(color);
+         else if (s.equals("btn_edittext_color1"))
+             setBtn_edittext_color1(color);
+         else if (s.equals("btn_edittext_color2"))
+             setBtn_edittext_color2(color);
     }
 }
